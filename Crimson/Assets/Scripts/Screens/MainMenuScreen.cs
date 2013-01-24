@@ -34,6 +34,8 @@ public class MainMenuScreen : MonoBehaviour {
 		
 		GUI.Button(new Rect(Screen.width * 0.55f, Screen.height * 0.7f, Screen.width * 0.20f, Screen.height * 0.1f), "Credits",menuStyle);
 		
-		GUI.Button(new Rect(Screen.width * 0.83f, Screen.height * 0.7f, Screen.width * 0.20f, Screen.height * 0.1f), "Exit", menuStyle);
+		if (GUI.Button(new Rect(Screen.width * 0.83f, Screen.height * 0.7f, Screen.width * 0.20f, Screen.height * 0.1f), "Exit", menuStyle)){
+			Application.Quit();	
+		}
 	}
 }
