@@ -14,9 +14,12 @@ public class SettingsMenuScreen : MonoBehaviour {
 	public float effectsVolumeBar;
 	public float mouseSensitivity;
 	
+	private Game myGame;
+	
 	// Use this for initialization
 	void Start () {	
 		sm = (SoundManager)GameObject.Find ("SoundManager").GetComponent<SoundManager>();
+		myGame = GameObject.Find ("Game").GetComponent<Game>();
 		
 		menuStyle = new GUIStyle();
 		menuStyle.fontSize = Mathf.RoundToInt(Screen.height * 0.1f);
@@ -25,14 +28,19 @@ public class SettingsMenuScreen : MonoBehaviour {
 		
 		settings = Settings.volume;
 		
-		musicVolumeBar = 0.5f;
-		effectsVolumeBar = 0.5f;
-		mouseSensitivity = 10;
+		musicVolumeBar = myGame.musicVolume;
+		effectsVolumeBar = myGame.effectsVolume;
+		mouseSensitivity = myGame.sensitivity;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		switch(settings){
+			case Settings.volume:
+				sm.setBGMVolume (musicVolumeBar);
+				sm.setSEVolume (effectsVolumeBar);
+			break;
+		}
 	}
 	
 	void OnGUI(){
@@ -41,14 +49,17 @@ public class SettingsMenuScreen : MonoBehaviour {
 		
 		menuStyle.fontSize = Mathf.RoundToInt (Screen.height * 0.05f);
 		if (GUI.Button (new Rect(0, Screen.height * 0.15f, Screen.width * 0.2f, Screen.height * 0.1f), "Volume",menuStyle)){
+			sm.playSound (0);
 			settings = Settings.volume;	
 		}
 		
 		if (GUI.Button (new Rect(Screen.width * 0.25f, Screen.height * 0.15f, Screen.width * 0.2f, Screen.height * 0.1f), "Camera", menuStyle)){
+			sm.playSound (0);
 			settings = Settings.camera;	
 		}
 		
 		if (GUI.Button (new Rect(Screen.width * 0.4f, Screen.height * 0.8f, Screen.width * 0.4f, Screen.height * 0.1f), "Return",menuStyle)){
+			sm.playSound (0);
 			Instantiate (Resources.Load ("Prefabs/Main Menu"));
 			DestroyImmediate (this.gameObject);
 		}

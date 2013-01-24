@@ -8,6 +8,8 @@ public class SoundManager : MonoBehaviour {
 	public AudioClip[] music;
 	public AudioClip[] sounds;
 	
+	private Game myGame;
+	
 	void Awake ()
 	{
 		DontDestroyOnLoad (this);
@@ -16,6 +18,8 @@ public class SoundManager : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
 	{
+		myGame = GameObject.Find ("Game").GetComponent<Game>();
+		
 		bgm = this.gameObject.AddComponent<AudioSource> ();
 		se = this.gameObject.AddComponent<AudioSource> ();
 		
@@ -25,7 +29,8 @@ public class SoundManager : MonoBehaviour {
 		bgm.playOnAwake = true;
 		se.playOnAwake = true;
 		
-		setVolume(0.3f);
+		setVolume(0.5f);
+		playMusic (0);
 	}
 	
 	// Sound Effects
@@ -60,6 +65,8 @@ public class SoundManager : MonoBehaviour {
 			se.volume = 1.0f;
 		else
 			se.volume = val;
+		
+		myGame.effectsVolume = se.volume;
 	}
 	
 	public void addSEVolume(float val){
@@ -68,6 +75,8 @@ public class SoundManager : MonoBehaviour {
 			se.volume = 0.0f;
 		else if (se.volume > 1.0f)
 			se.volume = 1.0f;
+		
+		myGame.effectsVolume = se.volume;
 	}
 	
 	public float getSEVolume(){
@@ -106,6 +115,8 @@ public class SoundManager : MonoBehaviour {
 			bgm.volume = 1.0f;
 		else
 			bgm.volume = val;
+		
+		myGame.musicVolume = bgm.volume;
 	}
 	
 	public void addBGMVolume(float val){
@@ -114,6 +125,8 @@ public class SoundManager : MonoBehaviour {
 			bgm.volume = 0.0f;
 		else if (bgm.volume > 1.0f)
 			bgm.volume = 1.0f;
+		
+		myGame.musicVolume = bgm.volume;
 	}
 	
 	public float getBGMVolume(){
