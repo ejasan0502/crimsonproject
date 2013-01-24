@@ -47,12 +47,16 @@ public class CharacterCreationScreen : MonoBehaviour
 				charClass = "Marksman";
 		}
 			
-		if (GUI.Button (new Rect (Screen.width * 0.35f, Screen.height * 0.8f, Screen.width * 0.4f, Screen.height * 0.1f), "Create", menuStyle)) {	
+		if (GUI.Button (new Rect (Screen.width * 0.2f, Screen.height * 0.8f, Screen.width * 0.4f, Screen.height * 0.1f), "Create", menuStyle)) {	
 			myGame.CharacterList.Insert (myGame.CharacterSlotSelected, new Character(myGame.CharacterSlotSelected, charName, charClass));
 			myGame.SaveCharData();
 			
 			Instantiate (Resources.Load ("Prefabs/Character Selection Menu"));
 			DestroyImmediate(this.gameObject);
 		}	
+		if (GUI.Button (new Rect(Screen.width * 0.6f, Screen.height * 0.8f, Screen.width * 0.4f, Screen.height * 0.1f), "Back", menuStyle)){
+			Instantiate (Resources.Load ("Prefabs/Character Selection Menu"));
+			DestroyImmediate(this.gameObject);
+		}
 	}
 }
