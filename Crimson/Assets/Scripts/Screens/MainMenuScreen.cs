@@ -26,9 +26,10 @@ public class MainMenuScreen : MonoBehaviour {
 		GUI.Label(new Rect(Screen.width * 0.20f, Screen.height * 0.3f, Screen.width * 0.4f, Screen.height * 0.2f),"Crimson",menuStyle);
 		
 		menuStyle.fontSize = Mathf.RoundToInt (Screen.height * 0.05f);
-		if (GUI.Button(new Rect(Screen.width * 0.05f, Screen.height * 0.7f, Screen.width * 0.2f, Screen.height * 0.1f),"Play",menuStyle)){
-			//Application.LoadLevel ("Game");	
+		if (GUI.Button(new Rect(Screen.width * 0.05f, Screen.height * 0.7f, Screen.width * 0.2f, Screen.height * 0.1f),"Play",menuStyle)){	
 			sm.playSound (0);
+			Instantiate (Resources.Load ("Prefabs/Character Selection Menu"));
+			DestroyImmediate (this.gameObject);
 		}
 		
 		if (GUI.Button(new Rect(Screen.width * 0.23f, Screen.height * 0.7f, Screen.width * 0.2f, Screen.height * 0.1f),"Settings",menuStyle)){
