@@ -13,6 +13,7 @@ public class Game : MonoBehaviour
 	// Character
 	public ArrayList CharacterList;
 	public int CharacterSlotSelected;
+	public Character player;
 	
 	void Awake ()
 	{
@@ -30,18 +31,6 @@ public class Game : MonoBehaviour
 		GetCharData ();
 	}
 	
-	// Use this for initialization
-	void Start ()
-	{
-		
-	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-	
-	}
-	
 	private void GetCharData ()
 	{		
 		StreamReader reader = new StreamReader (Application.dataPath + "/Scripts/1.txt");
@@ -50,13 +39,14 @@ public class Game : MonoBehaviour
 		int s = 0;
 		string n = "";
 		string c = "";
+		ArrayList inv = new ArrayList();
 		
 		try {
 			while ((str = reader.ReadLine()) != null) {
 				if (str == "character start"){
 					setChar = true;		
 				} else if (str == "character end"){
-					CharacterList.Insert (s, new Character(s,n,c));
+					CharacterList.Insert (s, new Character(s,n,c,inv));
 					setChar = false;
 				}
 				
@@ -71,6 +61,12 @@ public class Game : MonoBehaviour
 						break;
 						case "class":
 							c = args[1];
+						break;
+						case "inventory":
+							string[] invs = ((string)args[1]).Split (',');
+							for (int i = 0; i < invs.Length; i++){
+								inv.Add (invs[i]);	
+							}
 						break;
 					}
 				}
@@ -93,6 +89,15 @@ public class Game : MonoBehaviour
 					writer.WriteLine ("slot:" + ((Character)CharacterList[i]).slot);	
 					writer.WriteLine ("name:" + ((Character)CharacterList[i]).name);	
 					writer.WriteLine ("class:" + ((Character)CharacterList[i]).charClass);	
+					
+					string s = "";
+					int l = ((Character)CharacterList[i]).inventory.Count;
+					for (int j = 0; j < l; j++){
+						s += ((string)((Character)CharacterList[i]).inventory[j] + ",");
+					}
+					
+					writer.WriteLine ("inventory:" + s);
+					
 					writer.WriteLine ("character end");
 				}
 			}
@@ -101,5 +106,13 @@ public class Game : MonoBehaviour
 		} finally {
 			writer.Close ();	
 		}	
+	}
+	
+	public void SetPlayerChar(int index){
+		player = (Character)CharacterList[index];	
+	}
+	
+	public Character GetPlayerChar(){
+		return player;	
 	}
 }
