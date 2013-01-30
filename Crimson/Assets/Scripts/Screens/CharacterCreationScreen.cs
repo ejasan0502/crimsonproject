@@ -48,7 +48,10 @@ public class CharacterCreationScreen : MonoBehaviour
 		}
 			
 		if (GUI.Button (new Rect (Screen.width * 0.2f, Screen.height * 0.8f, Screen.width * 0.4f, Screen.height * 0.1f), "Create", menuStyle)) {	
-			myGame.CharacterList.Insert (myGame.CharacterSlotSelected, new Character(myGame.CharacterSlotSelected, charName, charClass));
+			ArrayList charInv = new ArrayList();
+			charInv.Add ("");
+			
+			myGame.CharacterList.Insert (myGame.CharacterSlotSelected, new Character(myGame.CharacterSlotSelected, charName, charClass, charInv));
 			myGame.SaveCharData();
 			
 			Instantiate (Resources.Load ("Prefabs/Character Selection Menu"));
