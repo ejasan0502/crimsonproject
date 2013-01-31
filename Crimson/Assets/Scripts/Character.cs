@@ -8,6 +8,8 @@ public struct Character
 	public string charClass;
 	public ArrayList inventory;
 	public int money;
+	public int level;
+	public int curExp;
 		
 	public Character (int s, string n, string c, ArrayList i, int m)
 	{
@@ -16,5 +18,7 @@ public struct Character
 		charClass = c;
 		inventory = i;
 		money = m;
+		level = 1;
+		curExp = 0;
 	}
 }
