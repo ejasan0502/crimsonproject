@@ -77,6 +77,7 @@ public class UserInterface : MonoBehaviour
 	{
 		if (display) {
 			menuStyle.fontSize = Mathf.RoundToInt (Screen.height * 0.05f);
+			menuStyle.alignment = TextAnchor.MiddleLeft;
 			GUI.Label (new Rect (0, 0, Screen.width * 0.3f, Screen.height * 0.05f), player.name, menuStyle);	
 			
 			Rect pos = new Rect (Screen.width * 0.0125f, Screen.height * 0.05f, Screen.width * 0.3f, Screen.height * 0.075f);
@@ -161,7 +162,7 @@ public class UserInterface : MonoBehaviour
 	{
 		if (inventory){	
 			// Bags
-			for (int i = 0; i < 5; i++){
+			for (int i = 0; i < 1; i++){
 				GUI.Button (new Rect(	3 + ((inventoryRect.width - 6)/5) * i, 
 										inventoryRect.height * 0.1f, 
 										(inventoryRect.width - 6)/5, 
@@ -171,22 +172,30 @@ public class UserInterface : MonoBehaviour
 			
 			// Slots
 			int j = 0;
+			string s;
 			for (int i = 0; i < 25; i++){
 				if (i % 5 == 0 && i > 0){
 					j++;
+				}
+				
+				s = "";
+				if (i < player.inventory.Count){
+					if (player.inventory[i] != null){
+						
+					}
 				}
 				
 				GUI.Box (new Rect(	3 + ((inventoryRect.width-6)/5) * (i % 5), 
 									(inventoryRect.height * 0.1f + Screen.height * 0.1f) + (Screen.height * 0.1f) * j, 
 									(inventoryRect.width - 6)/5, 
 									Screen.height * 0.1f), 
-									"");
+									"" + s);
 			}
 			
 			// Money
-			menuStyle.fontSize = Mathf.RoundToInt (inventoryRect.height * 0.075f);
+			menuStyle.fontSize = Mathf.RoundToInt (inventoryRect.height * 0.05f);
 			menuStyle.alignment = TextAnchor.MiddleRight;
-			GUI.Label (new Rect(inventoryRect.width * 0.5f, inventoryRect.height * 0.88f, inventoryRect.width * 0.5f - 6, inventoryRect.height * 0.1f), "$ ", menuStyle);
+			GUI.Label (new Rect(inventoryRect.width * 0.5f, inventoryRect.height * 0.88f, inventoryRect.width * 0.5f - 6, inventoryRect.height * 0.1f), "$ " + player.money, menuStyle);
 		}
 		
 		GUI.DragWindow (new Rect(0,0,Screen.width,Screen.height));

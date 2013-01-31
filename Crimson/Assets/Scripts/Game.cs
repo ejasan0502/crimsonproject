@@ -40,13 +40,14 @@ public class Game : MonoBehaviour
 		string n = "";
 		string c = "";
 		ArrayList inv = new ArrayList();
+		int m = 0;
 		
 		try {
 			while ((str = reader.ReadLine()) != null) {
 				if (str == "character start"){
 					setChar = true;		
 				} else if (str == "character end"){
-					CharacterList.Insert (s, new Character(s,n,c,inv));
+					CharacterList.Insert (s, new Character(s,n,c,inv,m));
 					setChar = false;
 				}
 				
@@ -67,6 +68,9 @@ public class Game : MonoBehaviour
 							for (int i = 0; i < invs.Length; i++){
 								inv.Add (invs[i]);	
 							}
+						break;
+					case "money":
+							m = int.Parse(args[1]);
 						break;
 					}
 				}
@@ -97,6 +101,7 @@ public class Game : MonoBehaviour
 					}
 					
 					writer.WriteLine ("inventory:" + s);
+					writer.WriteLine ("money:" + ((Character)CharacterList[i]).money);
 					
 					writer.WriteLine ("character end");
 				}
