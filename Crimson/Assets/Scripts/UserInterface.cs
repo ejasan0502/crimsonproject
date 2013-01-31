@@ -23,7 +23,6 @@ public class UserInterface : MonoBehaviour
 	public Texture2D foreground;
 	public Texture2D foreground2;
 	private float num;
-	
 	public Vector2 inventoryScrollPos;
 	public Vector2 questsScrollPos;
 	public Vector2 skillsScrollPos;
@@ -160,44 +159,59 @@ public class UserInterface : MonoBehaviour
 	
 	void window (int windowID)
 	{
-		if (inventory){	
-			// Bags
-			for (int i = 0; i < 1; i++){
-				GUI.Button (new Rect(	3 + ((inventoryRect.width - 6)/5) * i, 
+		if (inventory) {	
+			/*
+			for (int i = 0; i < 5; i++) {
+				GUI.Button (new Rect (3 + ((inventoryRect.width - 6) / 5) * i, 
 										inventoryRect.height * 0.1f, 
-										(inventoryRect.width - 6)/5, 
+										(inventoryRect.width - 6) / 5, 
 										inventoryRect.height * 0.1f), 
-										(i + 1).ToString());
+										(i + 1).ToString ());
 			}
 			
-			// Slots
 			int j = 0;
-			string s;
-			for (int i = 0; i < 25; i++){
-				if (i % 5 == 0 && i > 0){
+			char s;
+
+			for (int i = 0; i < 25; i++) {
+				if (i % 5 == 0 && i > 0) {
 					j++;
 				}
 				
-				s = "";
-				if (i < player.inventory.Count){
+				s = '\0';
+				if (i < player.inventory.Count) {
 					if (player.inventory[i] != null){
-						
+						s = ((string)player.inventory[i])[0];	
 					}
 				}
 				
-				GUI.Box (new Rect(	3 + ((inventoryRect.width-6)/5) * (i % 5), 
+				GUI.Box (new Rect (3 + ((inventoryRect.width - 6) / 5) * (i % 5), 
 									(inventoryRect.height * 0.1f + Screen.height * 0.1f) + (Screen.height * 0.1f) * j, 
-									(inventoryRect.width - 6)/5, 
+									(inventoryRect.width - 6) / 5, 
 									Screen.height * 0.1f), 
 									"" + s);
 			}
+			*/
+			
+			inventoryScrollPos = GUI.BeginScrollView (	new Rect(0,inventoryRect.height * 0.1f, inventoryRect.width, inventoryRect.height),
+														inventoryScrollPos, new Rect(0,0,inventoryRect.width,inventoryRect.height));
+			
+			for (int i = 0; i < player.inventory.Count; i++){
+				GUI.Box (	new Rect(0,inventoryRect.height * 0.1f * i, inventoryRect.width, inventoryRect.height * 0.1f),
+							((string)player.inventory[i]));	
+			}
+			
+			GUI.EndScrollView ();
 			
 			// Money
 			menuStyle.fontSize = Mathf.RoundToInt (inventoryRect.height * 0.05f);
 			menuStyle.alignment = TextAnchor.MiddleRight;
-			GUI.Label (new Rect(inventoryRect.width * 0.5f, inventoryRect.height * 0.88f, inventoryRect.width * 0.5f - 6, inventoryRect.height * 0.1f), "$ " + player.money, menuStyle);
+			GUI.Label (	new Rect (inventoryRect.width * 0.5f, inventoryRect.height * 0.88f, inventoryRect.width * 0.5f - 6, inventoryRect.height * 0.1f), 
+						"$ " + player.money, 
+						menuStyle);
 		}
 		
-		GUI.DragWindow (new Rect(0,0,Screen.width,Screen.height));
+		Rect r = new Rect (0, 0, inventoryRect.width, inventoryRect.height * 0.1f);
+
+		GUI.DragWindow (r);
 	}
 }

@@ -7,6 +7,6 @@ character start
 slot:1
 name:Xylem
 class:Engineer
-inventory:M4A1 Assault Rifle,Glock,Wrench
+inventory:M4A1,Glock19,Wrench
 money:100
 character end
