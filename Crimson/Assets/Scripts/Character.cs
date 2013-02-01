@@ -11,6 +11,8 @@ public struct Character
 	public ArrayList questsAvailable;
 	public ArrayList questsCompleted;
 	public ArrayList skills;
+	public int level;
+	public int curExp;
 		
 	public Character (int s, string n, string c, ArrayList i, int m, ArrayList qa, ArrayList qc, ArrayList sk)
 	{
@@ -22,5 +24,7 @@ public struct Character
 		questsAvailable = qa;
 		questsCompleted = qc;
 		skills = sk;
+		level = 1;
+		curExp = 0;
 	}
 }

@@ -50,7 +50,10 @@ public class Game : MonoBehaviour
 		int s = 0;
 		string n = "";
 		string c = "";
-		ArrayList inv = new ArrayList ();
+		int lvl = 0;
+		int xp = 0;
+		
+		ArrayList inv = new ArrayList();
 		int m = 0;
 		ArrayList qa = new ArrayList ();
 		ArrayList qc = new ArrayList ();
@@ -83,8 +86,14 @@ public class Game : MonoBehaviour
 							inv.Add (invs [i]);	
 						}
 						break;
-					case "money":
-						m = int.Parse (args [1]);
+						case "money":
+							m = int.Parse(args[1]);
+						break;
+						case "level":
+							lvl = int.Parse(args[1]);
+						break;
+						case "xp":
+							xp = int.Parse (args[1]);
 						break;
 					}
 				}
@@ -104,9 +113,11 @@ public class Game : MonoBehaviour
 			for (int i = 0; i < 3; i++) {
 				if (CharacterList [i] != null) {
 					writer.WriteLine ("character start");
-					writer.WriteLine ("slot:" + ((Character)CharacterList [i]).slot);	
-					writer.WriteLine ("name:" + ((Character)CharacterList [i]).name);	
-					writer.WriteLine ("class:" + ((Character)CharacterList [i]).charClass);	
+					writer.WriteLine ("slot:" + ((Character)CharacterList[i]).slot);	
+					writer.WriteLine ("name:" + ((Character)CharacterList[i]).name);	
+					writer.WriteLine ("class:" + ((Character)CharacterList[i]).charClass);	
+					writer.WriteLine ("level:" + ((Character)CharacterList[i]).level);
+					writer.WriteLine ("xp:" + ((Character)CharacterList[i]).curExp);
 					
 					string s = "";
 					int l = ((Character)CharacterList [i]).inventory.Count;
