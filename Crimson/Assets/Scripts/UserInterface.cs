@@ -11,21 +11,14 @@ public class UserInterface : MonoBehaviour
 	private Character player;
 	private GameObject playerObj;
 	private bool display;
-	private bool inventory;
-	public Rect inventoryRect;
-	private bool charWindow;
-	private Rect characterRect;
-	private bool skills;
-	private Rect skillsRect;
-	private bool quests;
-	private Rect questsRect;
+	public bool inventory;
+	public bool charWindow;
+	public bool skills;
+	public bool quests;
 	public Texture2D background;
 	public Texture2D foreground;
 	public Texture2D foreground2;
 	private float num;
-	public Vector2 inventoryScrollPos;
-	public Vector2 questsScrollPos;
-	public Vector2 skillsScrollPos;
 	
 	// Use this for initialization
 	void Start ()
@@ -55,15 +48,8 @@ public class UserInterface : MonoBehaviour
 		charWindow = false;
 		skills = false;
 		quests = false;
-		inventoryRect = new Rect (Screen.width * 0.5f, Screen.height * 0.1f, Screen.width * 0.4f, Screen.height * 0.8f);
-		characterRect = new Rect (0, Screen.height * 0.1f, Screen.width * 0.4f, Screen.height * 0.8f);
-		skillsRect = new Rect (Screen.width * 0.5f, Screen.height * 0.1f, Screen.width * 0.4f, Screen.height * 0.8f);
-		questsRect = new Rect (0, Screen.height * 0.1f, Screen.width * 0.4f, Screen.height * 0.8f);
 		
 		num = 100;
-		inventoryScrollPos = Vector2.zero;
-		questsScrollPos = Vector2.zero;
-		skillsScrollPos = Vector2.zero;
 	}
 	
 	// Update is called once per frame
@@ -88,130 +74,24 @@ public class UserInterface : MonoBehaviour
 			GUI.DrawTexture (new Rect (pos.x, pos.y, pos.width * (num / 100), pos.height), foreground2, ScaleMode.StretchToFill, true);
 		}
 		
-		// Inventory
-		if (Input.GetKeyDown (KeyCode.I)) {
-			Debug.Log ("Inventory open");
-			inventory = true;
-		} else if (Input.GetKeyUp (KeyCode.I)) {
-			Debug.Log ("Inventory close");	
-			playerObj.GetComponent<MouseLook> ().enabled = true;
-			Camera.mainCamera.GetComponent<MouseLook> ().enabled = true;
-			inventory = false;
-		}
-		
-		if (inventory) {
-			inventoryRect = GUI.Window (0, inventoryRect, window, "Inventory");	
-			playerObj.GetComponent<MouseLook> ().enabled = false;
-			Camera.mainCamera.GetComponent<MouseLook> ().enabled = false;
-		}
-		
-		// Character
-		if (Input.GetKeyDown (KeyCode.C)) {
-			Debug.Log ("Character open");
-			charWindow = true;
-		} else if (Input.GetKeyUp (KeyCode.C)) {
-			Debug.Log ("Character close");	
-			playerObj.GetComponent<MouseLook> ().enabled = true;
-			Camera.mainCamera.GetComponent<MouseLook> ().enabled = true;
-			charWindow = false;
-		}
-		
-		if (charWindow) {
-			characterRect = GUI.Window (1, characterRect, window, "Character");	
-			playerObj.GetComponent<MouseLook> ().enabled = false;
-			Camera.mainCamera.GetComponent<MouseLook> ().enabled = false;	
-		}
-		
-		// Skills
-		if (Input.GetKeyDown (KeyCode.K)) {
-			Debug.Log ("Skills open");
-			skills = true;
-		} else if (Input.GetKeyUp (KeyCode.K)) {
-			Debug.Log ("Skills close");	
-			playerObj.GetComponent<MouseLook> ().enabled = true;
-			Camera.mainCamera.GetComponent<MouseLook> ().enabled = true;
-			skills = false;
-		}
-		
-		if (skills) {
-			skillsRect = GUI.Window (2, skillsRect, window, "Skills");	
-			playerObj.GetComponent<MouseLook> ().enabled = false;
-			Camera.mainCamera.GetComponent<MouseLook> ().enabled = false;	
-		}
-		
-		// Quests
-		if (Input.GetKeyDown (KeyCode.T)) {
-			Debug.Log ("Quests open");
-			quests = true;
-		} else if (Input.GetKeyUp (KeyCode.T)) {
-			Debug.Log ("Quests close");	
-			playerObj.GetComponent<MouseLook> ().enabled = true;
-			Camera.mainCamera.GetComponent<MouseLook> ().enabled = true;
-			quests = false;
-		}
-		
-		if (quests) {
-			questsRect = GUI.Window (3, questsRect, window, "Quests");	
-			playerObj.GetComponent<MouseLook> ().enabled = false;
-			Camera.mainCamera.GetComponent<MouseLook> ().enabled = false;	
-		}
-	}
-	
-	void window (int windowID)
-	{
-		if (inventory) {	
-			/*
-			for (int i = 0; i < 5; i++) {
-				GUI.Button (new Rect (3 + ((inventoryRect.width - 6) / 5) * i, 
-										inventoryRect.height * 0.1f, 
-										(inventoryRect.width - 6) / 5, 
-										inventoryRect.height * 0.1f), 
-										(i + 1).ToString ());
+		if (!inventory){
+			if (Input.GetKeyDown (KeyCode.I)) {
+				Debug.Log ("Inventory open");
+				this.gameObject.AddComponent<InventoryWindow>();
+				inventory = true;
 			}
-			
-			int j = 0;
-			char s;
-
-			for (int i = 0; i < 25; i++) {
-				if (i % 5 == 0 && i > 0) {
-					j++;
-				}
-				
-				s = '\0';
-				if (i < player.inventory.Count) {
-					if (player.inventory[i] != null){
-						s = ((string)player.inventory[i])[0];	
-					}
-				}
-				
-				GUI.Box (new Rect (3 + ((inventoryRect.width - 6) / 5) * (i % 5), 
-									(inventoryRect.height * 0.1f + Screen.height * 0.1f) + (Screen.height * 0.1f) * j, 
-									(inventoryRect.width - 6) / 5, 
-									Screen.height * 0.1f), 
-									"" + s);
-			}
-			*/
-			
-			inventoryScrollPos = GUI.BeginScrollView (	new Rect(0,inventoryRect.height * 0.1f, inventoryRect.width, inventoryRect.height),
-														inventoryScrollPos, new Rect(0,0,inventoryRect.width,inventoryRect.height));
-			
-			for (int i = 0; i < player.inventory.Count; i++){
-				GUI.Box (	new Rect(0,inventoryRect.height * 0.1f * i, inventoryRect.width, inventoryRect.height * 0.1f),
-							((string)player.inventory[i]));	
-			}
-			
-			GUI.EndScrollView ();
-			
-			// Money
-			menuStyle.fontSize = Mathf.RoundToInt (inventoryRect.height * 0.05f);
-			menuStyle.alignment = TextAnchor.MiddleRight;
-			GUI.Label (	new Rect (inventoryRect.width * 0.5f, inventoryRect.height * 0.88f, inventoryRect.width * 0.5f - 6, inventoryRect.height * 0.1f), 
-						"$ " + player.money, 
-						menuStyle);
+		} else if (GetComponent<InventoryWindow>() == null && Input.GetKeyDown (KeyCode.I)){
+			inventory = false;	
 		}
 		
-		Rect r = new Rect (0, 0, inventoryRect.width, inventoryRect.height * 0.1f);
-
-		GUI.DragWindow (r);
+		if (!skills){
+			if (Input.GetKeyDown (KeyCode.K)) {
+				Debug.Log ("Skills open");
+				this.gameObject.AddComponent<SkillsWindow>();
+				skills = true;
+			}
+		} else if (GetComponent<SkillsWindow>() == null && Input.GetKeyDown (KeyCode.K)){
+			skills = false;	
+		}
 	}
 }

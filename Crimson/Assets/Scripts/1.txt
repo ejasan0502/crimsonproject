@@ -1,9 +1,4 @@
 character start
-slot:0
-name:Enter Here
-class:Marksman
-character end
-character start
 slot:1
 name:Xylem
 class:Engineer

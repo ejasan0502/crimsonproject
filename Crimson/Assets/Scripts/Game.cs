@@ -15,6 +15,11 @@ public class Game : MonoBehaviour
 	public int CharacterSlotSelected;
 	public Character player;
 	
+	// Game
+	public ArrayList QuestList;
+	public ArrayList MarksmanSkills;
+	public ArrayList EngineerSkills;
+	
 	void Awake ()
 	{
 		DontDestroyOnLoad (this);	
@@ -23,12 +28,18 @@ public class Game : MonoBehaviour
 		effectsVolume = 1.0f;
 		sensitivity = 10.0f;
 		
-		CharacterList = new ArrayList();
-		for (int i = 0; i < 3; i++){
+		CharacterList = new ArrayList ();
+		for (int i = 0; i < 3; i++) {
 			CharacterList.Add (null);	
 		}
+		
+		QuestList = new ArrayList ();
+		MarksmanSkills = new ArrayList ();
+		EngineerSkills = new ArrayList ();
 
 		GetCharData ();
+		GenerateQuestList ();
+		GenerateSkillsList ();
 	}
 	
 	private void GetCharData ()
@@ -39,38 +50,41 @@ public class Game : MonoBehaviour
 		int s = 0;
 		string n = "";
 		string c = "";
-		ArrayList inv = new ArrayList();
+		ArrayList inv = new ArrayList ();
 		int m = 0;
+		ArrayList qa = new ArrayList ();
+		ArrayList qc = new ArrayList ();
+		ArrayList sk = new ArrayList ();
 		
 		try {
 			while ((str = reader.ReadLine()) != null) {
-				if (str == "character start"){
+				if (str == "character start") {
 					setChar = true;		
-				} else if (str == "character end"){
-					CharacterList.Insert (s, new Character(s,n,c,inv,m));
+				} else if (str == "character end") {
+					CharacterList.Insert (s, new Character (s, n, c, inv, m, qa, qc, sk));
 					setChar = false;
 				}
 				
-				if (setChar){
-					string[] args = str.Split(':');
-					switch(args[0]){
-						case "slot":
-							s = int.Parse(args[1]);
+				if (setChar) {
+					string[] args = str.Split (':');
+					switch (args [0]) {
+					case "slot":
+						s = int.Parse (args [1]);
 						break;
-						case "name":
-							n = args[1];
+					case "name":
+						n = args [1];
 						break;
-						case "class":
-							c = args[1];
+					case "class":
+						c = args [1];
 						break;
-						case "inventory":
-							string[] invs = ((string)args[1]).Split (',');
-							for (int i = 0; i < invs.Length; i++){
-								inv.Add (invs[i]);	
-							}
+					case "inventory":
+						string[] invs = ((string)args [1]).Split (',');
+						for (int i = 0; i < invs.Length; i++) {
+							inv.Add (invs [i]);	
+						}
 						break;
 					case "money":
-							m = int.Parse(args[1]);
+						m = int.Parse (args [1]);
 						break;
 					}
 				}
@@ -87,21 +101,24 @@ public class Game : MonoBehaviour
 		StreamWriter writer = new StreamWriter (Application.dataPath + "/Scripts/1.txt");
 
 		try {
-			for (int i = 0; i < 3; i++){
-				if (CharacterList[i] != null){
+			for (int i = 0; i < 3; i++) {
+				if (CharacterList [i] != null) {
 					writer.WriteLine ("character start");
-					writer.WriteLine ("slot:" + ((Character)CharacterList[i]).slot);	
-					writer.WriteLine ("name:" + ((Character)CharacterList[i]).name);	
-					writer.WriteLine ("class:" + ((Character)CharacterList[i]).charClass);	
+					writer.WriteLine ("slot:" + ((Character)CharacterList [i]).slot);	
+					writer.WriteLine ("name:" + ((Character)CharacterList [i]).name);	
+					writer.WriteLine ("class:" + ((Character)CharacterList [i]).charClass);	
 					
 					string s = "";
-					int l = ((Character)CharacterList[i]).inventory.Count;
-					for (int j = 0; j < l; j++){
-						s += ((string)((Character)CharacterList[i]).inventory[j] + ",");
+					int l = ((Character)CharacterList [i]).inventory.Count;
+					for (int j = 0; j < l; j++) {
+						s += ((string)((Character)CharacterList [i]).inventory [j]);
+						if (s != ""){
+							s += ",";	
+						}
 					}
 					
 					writer.WriteLine ("inventory:" + s);
-					writer.WriteLine ("money:" + ((Character)CharacterList[i]).money);
+					writer.WriteLine ("money:" + ((Character)CharacterList [i]).money);
 					
 					writer.WriteLine ("character end");
 				}
@@ -113,11 +130,60 @@ public class Game : MonoBehaviour
 		}	
 	}
 	
-	public void SetPlayerChar(int index){
-		player = (Character)CharacterList[index];	
+	public void SetPlayerChar (int index)
+	{
+		player = (Character)CharacterList [index];	
 	}
 	
-	public Character GetPlayerChar(){
+	public Character GetPlayerChar ()
+	{
 		return player;	
+	}
+	
+	public void GenerateQuestList ()
+	{
+		StreamReader reader = new StreamReader (Application.dataPath + "/Scripts/QuestList.txt");
+		
+		string str = "";
+		try {
+			while ((str = reader.ReadLine()) != null) {
+				string[] args = str.Split (',');
+				QuestList.Add (new Quest (args [0], args [1], args [2], int.Parse (args [3])));
+			}
+		} catch (Exception e) {
+			Debug.Log ("ERROR: " + e.Message);	
+		} finally {
+			reader.Close ();	
+		}
+	}
+	
+	public void GenerateSkillsList ()
+	{
+		StreamReader reader = new StreamReader (Application.dataPath + "/Scripts/MarksmanSkills.txt");
+		
+		string str = "";
+		try {
+			while ((str = reader.ReadLine()) != null) {
+				string[] args = str.Split (',');
+				MarksmanSkills.Add (new Skill (args [0], int.Parse (args [1]), float.Parse (args [2]), float.Parse (args [3]), args [4]));
+			}
+		} catch (Exception e) {
+			Debug.Log ("ERROR: " + e.Message);	
+		} finally {
+			reader.Close ();	
+		}	
+		
+		reader = new StreamReader (Application.dataPath + "/Scripts/EngineerSkills.txt");
+		str = "";
+		try {
+			while ((str = reader.ReadLine()) != null) {
+				string[] args = str.Split (',');
+				EngineerSkills.Add (new Skill (args [0], int.Parse (args [1]), float.Parse (args [2]), float.Parse (args [3]), args [4]));
+			}
+		} catch (Exception e) {
+			Debug.Log ("ERROR: " + e.Message);	
+		} finally {
+			reader.Close ();	
+		}
 	}
 }
