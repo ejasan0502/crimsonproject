@@ -1,0 +1,3 @@
+Pistol Mastery,1,0,10,Increase damage dealt by Pistols
+Rifle Mastery,1,0,10,Increase damage done by rifles
+Burning Shot,1,30,0,The players next shot burns the target

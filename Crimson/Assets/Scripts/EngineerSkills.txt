@@ -1,0 +1,3 @@
+Tool Mastery,1,0,10,Increase the damage done by engineering tools
+Robot Mastery,1,0,10,Increases the damage done by robots
+Robot Helper,1,10,0,Summons a small robot
