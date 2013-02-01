@@ -1,1 +1,9 @@
-
+character start
+slot:0
+name:Enter Here
+class:Marksman
+level:1
+xp:0
+inventory:
+money:0
+character end
