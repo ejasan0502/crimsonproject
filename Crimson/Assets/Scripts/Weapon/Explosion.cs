@@ -58,7 +58,7 @@ public class Explosion : MonoBehaviour
 				hitPoints *= explDamage;
 			
 				// apply damage to hit object
-				hit.rigidbody.SendMessageUpwards("ApplyDamage", hitPoints, SendMessageOptions.DontRequireReceiver);
+				hit.SendMessageUpwards("ApplyDamage", hitPoints, SendMessageOptions.DontRequireReceiver);
 			}
 		}
 	}
