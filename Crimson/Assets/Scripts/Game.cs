@@ -110,6 +110,7 @@ public class Game : MonoBehaviour
 		StreamWriter writer = new StreamWriter (Application.dataPath + "/Scripts/1.txt");
 
 		try {
+			Debug.Log("Saving Character Data");
 			for (int i = 0; i < 3; i++) {
 				if (CharacterList [i] != null) {
 					writer.WriteLine ("character start");

@@ -4,6 +4,7 @@ using System.Collections;
 public class Explosion : MonoBehaviour 
 {
 	public GameObject explosion;
+	
 	float creationTime = Time.time;
 	
 	float explRadius = 5.0f;

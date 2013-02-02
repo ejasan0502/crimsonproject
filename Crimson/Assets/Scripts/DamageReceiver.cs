@@ -4,9 +4,12 @@ using System.Collections;
 public class DamageReceiver : MonoBehaviour 
 {
 	public int hitPoints = 100;
+	public int xp;
 	float detonateDelay = 0.0f;
 	public Transform explosion;
 	public Rigidbody replaceDead;
+	GameObject player;
+	
 	
 	void ApplyDamage (int damage)
 	{
@@ -43,5 +46,11 @@ public class DamageReceiver : MonoBehaviour
 			dead.rigidbody.velocity = rigidbody.velocity;
 			dead.angularVelocity = rigidbody.angularVelocity;
 		}
+		
+		// find and send player xp
+		player = GameObject.Find("Player");
+		player.SendMessage("giveXP", xp);
 	}
+	
+	
 }
