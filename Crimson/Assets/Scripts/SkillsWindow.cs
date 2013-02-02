@@ -30,7 +30,7 @@ public class SkillsWindow : MonoBehaviour {
 	
 	void OnGUI ()
 	{
-		r = GUI.Window (1, r, window, "Skills");	
+		r = GUI.Window (3, r, window, "Skills");	
 		playerObj.GetComponent<MouseLook> ().enabled = false;
 		Camera.mainCamera.GetComponent<MouseLook> ().enabled = false;
 		

@@ -52,6 +52,9 @@ public class Game : MonoBehaviour
 		string c = "";
 		int lvl = 0;
 		int xp = 0;
+		float hp = 100;
+		float sta = 50;
+		float dmg = 10;
 		
 		ArrayList inv = new ArrayList();
 		int m = 0;
@@ -65,6 +68,8 @@ public class Game : MonoBehaviour
 					setChar = true;		
 				} else if (str == "character end") {
 					CharacterList.Insert (s, new Character (s, n, c, inv, m, qa, qc, sk));
+					((Character)CharacterList[s]).SetPlayer(lvl,hp,sta,dmg);
+					((Character)CharacterList[s]).SetCurrent (xp,((Character)CharacterList[s]).healthMax,((Character)CharacterList[s]).staminaMax);
 					setChar = false;
 				}
 				
@@ -95,6 +100,15 @@ public class Game : MonoBehaviour
 						case "xp":
 							xp = int.Parse (args[1]);
 						break;
+					case "health":
+						hp = float.Parse(args[1]);
+						break;
+					case "stamina":
+						sta = float.Parse(args[1]);
+						break;
+					case "damage":
+						dmg = float.Parse(args[1]);
+						break;
 					}
 				}
 			}
@@ -118,6 +132,9 @@ public class Game : MonoBehaviour
 					writer.WriteLine ("class:" + ((Character)CharacterList[i]).charClass);	
 					writer.WriteLine ("level:" + ((Character)CharacterList[i]).level);
 					writer.WriteLine ("xp:" + ((Character)CharacterList[i]).curExp);
+					writer.WriteLine ("health:" + ((Character)CharacterList[i]).health);
+					writer.WriteLine ("stamina:" + ((Character)CharacterList[i]).stamina);
+					writer.WriteLine ("damage:" + ((Character)CharacterList[i]).damage);
 					
 					string s = "";
 					int l = ((Character)CharacterList [i]).inventory.Count;
@@ -159,7 +176,7 @@ public class Game : MonoBehaviour
 		try {
 			while ((str = reader.ReadLine()) != null) {
 				string[] args = str.Split (',');
-				QuestList.Add (new Quest (args [0], args [1], args [2], int.Parse (args [3])));
+				QuestList.Add (new Quest (args [0], int.Parse(args [1]), args [2], args[3], int.Parse (args [4])));
 			}
 		} catch (Exception e) {
 			Debug.Log ("ERROR: " + e.Message);	

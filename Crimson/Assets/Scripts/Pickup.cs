@@ -14,23 +14,33 @@ public class Pickup : MonoBehaviour {
 		sm = GameObject.Find ("SoundManager").GetComponent<SoundManager>();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-	
 	void OnControllerColliderHit(ControllerColliderHit other){
 		switch(other.gameObject.tag){
 		case "Health 30":
 			Debug.Log ("Obtained Health Pack 30");
+			if (player.health + 30 > player.healthMax){
+				player.health = player.healthMax;	
+			} else {
+				player.health += 30;	
+			}
 			Destroy(other.gameObject);
 			break;
 		case "Health 50":
 			Debug.Log ("Obtained Health Pack 50");
+			if (player.health + 50 > player.healthMax){
+				player.health = player.healthMax;	
+			} else {
+				player.health += 50;	
+			}
 			Destroy(other.gameObject);
 			break;
 		case "Health 75":
 			Debug.Log ("Obtained Health Pack 75");
+			if (player.health + 75 > player.healthMax){
+				player.health = player.healthMax;	
+			} else {
+				player.health += 75;	
+			}
 			Destroy(other.gameObject);
 			break;
 		case "Damage":
@@ -43,18 +53,34 @@ public class Pickup : MonoBehaviour {
 			break;
 		case "Stamina 30":
 			Debug.Log ("Obtained Stamina Pack 30");
+			if (player.stamina + 30 > player.staminaMax){
+				player.stamina = player.staminaMax;	
+			} else {
+				player.stamina += 30;	
+			}
 			Destroy(other.gameObject);
 			break;
 		case "Stamina 50":
 			Debug.Log ("Obtained Stamina Pack 50");
+			if (player.stamina + 50 > player.staminaMax){
+				player.stamina = player.staminaMax;	
+			} else {
+				player.stamina += 50;	
+			}
 			Destroy(other.gameObject);
 			break;
 		case "Stamina 75":
 			Debug.Log ("Obtained Stamina Pack 75");
+			if (player.stamina + 75 > player.staminaMax){
+				player.stamina = player.staminaMax;	
+			} else {
+				player.stamina += 75;	
+			}
 			Destroy(other.gameObject);
 			break;
 		case "Equip":
-			Debug.Log ("Obtained " + this.gameObject.name);
+			Debug.Log ("Obtained " + other.gameObject.name);
+			player.inventory.Add (other.gameObject.name);
 			Destroy(other.gameObject);
 			break;
 		}

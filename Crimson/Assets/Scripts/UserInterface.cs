@@ -18,7 +18,6 @@ public class UserInterface : MonoBehaviour
 	public Texture2D background;
 	public Texture2D foreground;
 	public Texture2D foreground2;
-	private float num;
 	
 	// Use this for initialization
 	void Start ()
@@ -48,14 +47,6 @@ public class UserInterface : MonoBehaviour
 		charWindow = false;
 		skills = false;
 		quests = false;
-		
-		num = 100;
-	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-		num -= 0.05f;
 	}
 	
 	void OnGUI ()
@@ -67,11 +58,11 @@ public class UserInterface : MonoBehaviour
 			
 			Rect pos = new Rect (Screen.width * 0.0125f, Screen.height * 0.05f, Screen.width * 0.3f, Screen.height * 0.075f);
 			GUI.DrawTexture (pos, background, ScaleMode.StretchToFill, true);
-			GUI.DrawTexture (new Rect (pos.x, pos.y, pos.width * (num / 100), pos.height), foreground, ScaleMode.StretchToFill, true);
+			GUI.DrawTexture (new Rect (pos.x, pos.y, pos.width * (player.health / player.healthMax), pos.height), foreground, ScaleMode.StretchToFill, true);
 			
 			pos = new Rect (Screen.width * 0.0125f, Screen.height * 0.13f, Screen.width * 0.3f, Screen.height * 0.035f);
 			GUI.DrawTexture (pos, background, ScaleMode.StretchToFill, true);
-			GUI.DrawTexture (new Rect (pos.x, pos.y, pos.width * (num / 100), pos.height), foreground2, ScaleMode.StretchToFill, true);
+			GUI.DrawTexture (new Rect (pos.x, pos.y, pos.width * (player.stamina / player.staminaMax), pos.height), foreground2, ScaleMode.StretchToFill, true);
 		}
 		
 		if (!inventory){
@@ -92,6 +83,26 @@ public class UserInterface : MonoBehaviour
 			}
 		} else if (GetComponent<SkillsWindow>() == null && Input.GetKeyDown (KeyCode.K)){
 			skills = false;	
+		}
+		
+		if (!quests){
+			if (Input.GetKeyDown (KeyCode.T)) {
+				Debug.Log ("Quests open");
+				this.gameObject.AddComponent<QuestsWindow>();
+				quests = true;
+			}
+		} else if (GetComponent<QuestsWindow>() == null && Input.GetKeyDown (KeyCode.T)){
+			quests = false;	
+		}
+		
+		if (!charWindow){
+			if (Input.GetKeyDown (KeyCode.C)) {
+				Debug.Log ("Character open");
+				this.gameObject.AddComponent<CharacterWindow>();
+				charWindow = true;
+			}
+		} else if (GetComponent<CharacterWindow>() == null && Input.GetKeyDown (KeyCode.C)){
+			charWindow = false;	
 		}
 	}
 }

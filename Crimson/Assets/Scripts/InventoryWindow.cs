@@ -30,7 +30,7 @@ public class InventoryWindow : MonoBehaviour
 	
 	void OnGUI ()
 	{
-		r = GUI.Window (0, r, window, "Inventory");	
+		r = GUI.Window (2, r, window, "Inventory");	
 		playerObj.GetComponent<MouseLook> ().enabled = false;
 		Camera.mainCamera.GetComponent<MouseLook> ().enabled = false;
 		
