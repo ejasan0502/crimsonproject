@@ -10,7 +10,7 @@ public class UserInterface : MonoBehaviour
 	private SoundManager sm;
 	private Character player;
 	private GameObject playerObj;
-	private bool display;
+	public bool display;
 	public bool inventory;
 	public bool charWindow;
 	public bool skills;

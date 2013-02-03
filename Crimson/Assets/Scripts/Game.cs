@@ -19,6 +19,8 @@ public class Game : MonoBehaviour
 	public ArrayList QuestList;
 	public ArrayList MarksmanSkills;
 	public ArrayList EngineerSkills;
+	public ArrayList VendorList;
+	public ArrayList WeaponsList;
 	
 	void Awake ()
 	{
@@ -36,10 +38,14 @@ public class Game : MonoBehaviour
 		QuestList = new ArrayList ();
 		MarksmanSkills = new ArrayList ();
 		EngineerSkills = new ArrayList ();
+		VendorList = new ArrayList();
+		WeaponsList = new ArrayList();
 
 		GetCharData ();
 		GenerateQuestList ();
 		GenerateSkillsList ();
+		GenerateVendorList ();
+		GenerateWeaponsList();
 	}
 	
 	private void GetCharData ()
@@ -208,6 +214,38 @@ public class Game : MonoBehaviour
 			while ((str = reader.ReadLine()) != null) {
 				string[] args = str.Split (',');
 				EngineerSkills.Add (new Skill (args [0], int.Parse (args [1]), float.Parse (args [2]), float.Parse (args [3]), args [4]));
+			}
+		} catch (Exception e) {
+			Debug.Log ("ERROR: " + e.Message);	
+		} finally {
+			reader.Close ();	
+		}
+	}
+	
+	private void GenerateVendorList(){
+		StreamReader reader = new StreamReader (Application.dataPath + "/Scripts/VendorList.txt");
+		
+		string str = "";
+		try {
+			while ((str = reader.ReadLine()) != null) {
+				string[] args = str.Split (':');
+				VendorList.Add (new NPC.Item(args[0],int.Parse(args[1])));
+			}
+		} catch (Exception e) {
+			Debug.Log ("ERROR: " + e.Message);	
+		} finally {
+			reader.Close ();	
+		}
+	}
+	
+	private void GenerateWeaponsList(){
+		StreamReader reader = new StreamReader (Application.dataPath + "/Scripts/WeaponsList.txt");
+		
+		string str = "";
+		try {
+			while ((str = reader.ReadLine()) != null) {
+				string[] args = str.Split (':');
+				WeaponsList.Add (new NPC.Weapon(args[0],int.Parse(args[1])));
 			}
 		} catch (Exception e) {
 			Debug.Log ("ERROR: " + e.Message);	
