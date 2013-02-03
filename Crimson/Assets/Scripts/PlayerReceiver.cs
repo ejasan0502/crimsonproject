@@ -7,6 +7,9 @@ public class PlayerReceiver : MonoBehaviour
 	public int HP_SCALE;// amount of hp to gain per level
 	public int BASE_XP;// base amount of xp required to level
 	public int XP_SCALE;// how much more xp will be required next level. min >1
+	public AudioClip smallDmg;
+	public AudioClip bigDmg;
+	public AudioClip Death;
 	int hitPoints;
 	int curLevel = 2;
 	int curXP;
@@ -14,6 +17,10 @@ public class PlayerReceiver : MonoBehaviour
 	Character player;
 	GameObject plr;
 	int[] xpToLevel;
+	float gotHit;
+	int maxHP;
+	Rect deadMsg;
+	
 	
 	
 	// instantiate variables
@@ -25,7 +32,8 @@ public class PlayerReceiver : MonoBehaviour
 		//curLevel = player.level;
 		curXP = player.curExp;
 		
-		hitPoints = BASE_HP + (curLevel * HP_SCALE);
+		maxHP = BASE_HP + (curLevel * HP_SCALE);
+		hitPoints = maxHP;
 		
 		xpToLevel = new int[MAX_LEVEL];
 		
@@ -61,18 +69,38 @@ public class PlayerReceiver : MonoBehaviour
 		player.level = curLevel;
 		player.curExp = curXP;
 		
+		maxHP = BASE_HP + (curLevel * HP_SCALE);
+		hitPoints = maxHP; 
+		
 		plr.SendMessage("SaveCharData");
 	}
 	
 	// do damage to the player
-	void damagePlayer (int dmg)
+	void ApplyDamage (int dmg)
 	{
 		// player is already dead
 		if (hitPoints <= 0) return;
 		
 		hitPoints -= dmg;
 		
-		// check if player
+		// play a sound when player is hit, limit how often sound can play
+		if (Time.time > gotHit && bigDmg && smallDmg) 
+		{
+			// Play a big pain sound
+			if (dmg > 20) 
+			{
+				audio.PlayOneShot(bigDmg, audio.volume);
+				gotHit = Time.time + Random.Range(bigDmg.length * 2, bigDmg.length * 3);
+			} 
+			else 
+			{
+				// Play a small pain sound
+				audio.PlayOneShot(smallDmg, audio.volume);
+				gotHit = Time.time + Random.Range(smallDmg.length * 2, smallDmg.length * 3);
+			}
+		}
+		
+		// check if player dies
 		if (hitPoints <= 0 )
 		{
 			killPlayer ();
@@ -82,6 +110,24 @@ public class PlayerReceiver : MonoBehaviour
 	// player has died
 	void killPlayer ()
 	{
-		Destroy(gameObject);
+		audio.PlayOneShot (Death, audio.volume);
+		// Disable all script behaviours (Essentially deactivating player control)
+		Component[] coms = GetComponentsInChildren<MonoBehaviour>();
+		foreach (MonoBehaviour b in coms) 
+		{
+			MonoBehaviour p = b as MonoBehaviour;
+			if (p)
+				p.enabled = false;
+		}
+		StartCoroutine(reloadLevel());
+	}
+	
+	
+	// reload the level
+	IEnumerator reloadLevel ()
+	{
+		yield return new WaitForSeconds(3);
+		Application.LoadLevel(Application.loadedLevel);
 	}
 }
+

@@ -4,7 +4,7 @@ using System.Collections;
 public class Grenade : MonoBehaviour 
 {
 	public Rigidbody grenade;
-	int speed = 15;
+	int speed = 10;
 	
 	// Use this for initialization
 	void Start () 

@@ -4,19 +4,21 @@ using System.Collections;
 public class Rifle : MonoBehaviour 
 {
 	// Change later to be based on equipt weapon
-	int range = 100;
-	float fireRate = .5f;
-	int force = 10;
-	int dmg = 7;
-	int clipSize = 20;
-	int clips = 5;
-	int reloadTime = 2;
+	public int range = 100;
+	public float fireRate = .5f;
+	public int force = 10;
+	public int dmg = 7;
+	public int clipSize = 20;
+	public int clips = 5;
+	public int reloadTime = 2;
 	ParticleEmitter hitParticle;
 	public Renderer muzzleFlash;
 	
 	int bulletsLeft = 0;
 	float nextFireTime = 0;
 	float m_LastFrameShot = -1;
+	
+	public bool IsOnPlayer;
 	
 	// Use this for initialization
 	void Start () 
