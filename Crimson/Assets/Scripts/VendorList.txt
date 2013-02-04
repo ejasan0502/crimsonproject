@@ -1,2 +1,2 @@
-First Aid:25
-Adrenaline:25
+First Aid:25:5:1
+Adrenaline:25:5:1

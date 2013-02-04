@@ -8,5 +8,5 @@ health:100
 stamina:50
 damage:10
 inventory:
-money:0
+money:1000
 character end

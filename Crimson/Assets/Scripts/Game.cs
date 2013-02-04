@@ -94,7 +94,8 @@ public class Game : MonoBehaviour
 					case "inventory":
 						string[] invs = ((string)args [1]).Split (',');
 						for (int i = 0; i < invs.Length; i++) {
-							inv.Add (invs [i]);	
+							if (invs[i].ToString () != "")
+								inv.Add (invs [i]);	
 						}
 						break;
 						case "money":
@@ -229,7 +230,7 @@ public class Game : MonoBehaviour
 		try {
 			while ((str = reader.ReadLine()) != null) {
 				string[] args = str.Split (':');
-				VendorList.Add (new NPC.Item(args[0],int.Parse(args[1])));
+				VendorList.Add (new NPC.Item(args[0],int.Parse(args[1]),float.Parse(args[2]),float.Parse(args[3])));
 			}
 		} catch (Exception e) {
 			Debug.Log ("ERROR: " + e.Message);	
@@ -245,7 +246,7 @@ public class Game : MonoBehaviour
 		try {
 			while ((str = reader.ReadLine()) != null) {
 				string[] args = str.Split (':');
-				WeaponsList.Add (new NPC.Weapon(args[0],int.Parse(args[1])));
+				WeaponsList.Add (new NPC.Item(args[0],int.Parse(args[1]),float.Parse(args[2]),float.Parse(args[3])));
 			}
 		} catch (Exception e) {
 			Debug.Log ("ERROR: " + e.Message);	

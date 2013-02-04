@@ -7,7 +7,7 @@ public struct Character
 	public string name;
 	public string charClass;
 	public ArrayList inventory;
-	public int money;
+	public float money;
 	public ArrayList questsAvailable;
 	public ArrayList questsCompleted;
 	public ArrayList skills;
@@ -19,7 +19,7 @@ public struct Character
 	public float staminaMax;
 	public float damage;
 		
-	public Character (int s, string n, string c, ArrayList i, int m, ArrayList qa, ArrayList qc, ArrayList sk)
+	public Character (int s, string n, string c, ArrayList i, float m, ArrayList qa, ArrayList qc, ArrayList sk)
 	{
 		slot = s;
 		name = n;

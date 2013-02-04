@@ -49,8 +49,7 @@ public class InventoryWindow : MonoBehaviour
 														scrollPosition, new Rect (0, 0, r.width, r.height));
 			
 		for (int i = 0; i < player.inventory.Count; i++) {
-			GUI.Box (new Rect (0, r.height * 0.1f * i, r.width, r.height * 0.1f),
-							((string)player.inventory [i]));	
+			GUI.Box (new Rect(0,r.height * 0.1f * i,r.width,r.height * 0.1f),((NPC.Item)player.inventory [i]).name);	
 		}
 			
 		GUI.EndScrollView ();

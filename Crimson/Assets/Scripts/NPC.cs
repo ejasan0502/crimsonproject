@@ -10,23 +10,15 @@ public class NPC : MonoBehaviour
 	{
 		public string name;
 		public int amount;
+		public float buy;
+		public float sell;
 		
-		public Item (string n, int a)
+		public Item (string n, int a, float b, float s)
 		{
 			name = n;
 			amount = a;
-		}
-	}
-	
-	public struct Weapon
-	{
-		public string name;
-		public int damage;
-		
-		public Weapon (string n, int d)
-		{
-			name = n;
-			damage = d;
+			buy = b;
+			sell = s;
 		}
 	}
 	
@@ -160,27 +152,51 @@ public class NPC : MonoBehaviour
 				}
 			}
 		} else if (displayTradeMenu) {
-			if (occ == occupation.vendor) {
+			switch(occ){
+			case occupation.vendor:
 				GUI.Box (new Rect (0, 0, r.width, r.height * 0.15f), "Trade");
 				scrollPosition = GUI.BeginScrollView (new Rect (0, r.height * 0.15f, r.width, r.height),
 														scrollPosition, new Rect (0, 0, r.width, r.height));
 			
 				for (int i = 0; i < myGame.VendorList.Count; i++) {
-					GUI.Button (new Rect (0, r.height * 0.3f * i, r.width, r.height * 0.3f), ((Item)myGame.VendorList [i]).name + "\n" + ((Item)myGame.VendorList [i]).amount);	
+					if (GUI.Button ( new Rect (0, r.height * 0.3f * i, r.width, r.height * 0.3f),((Item)myGame.VendorList [i]).name + "\n" + ((Item)myGame.VendorList [i]).amount.ToString ())){
+						if (player.money >= ((Item)myGame.VendorList [i]).buy){
+							player.inventory.Add (((Item)myGame.VendorList [i]));	
+							player.money -= ((Item)myGame.VendorList [i]).buy;
+							dialogue = "Thank you for your purchase!";
+							displayTradeMenu = false;
+						} else {
+							dialogue = "You don't have enough money. . .";	
+							displayTradeMenu = false;
+						}
+					}
 				}
 			
 				GUI.EndScrollView ();
-			} else if (occ == occupation.merchant) {
+				break;
+			case occupation.merchant:
 				GUI.Box (new Rect (0, 0, r.width, r.height * 0.15f), "Trade");
 				scrollPosition = GUI.BeginScrollView (new Rect (0, r.height * 0.15f, r.width, r.height),
 														scrollPosition, new Rect (0, 0, r.width, r.height));
-			
+				
 				for (int i = 0; i < myGame.WeaponsList.Count; i++) {
-					GUI.Button (new Rect (0, r.height * 0.3f * i, r.width, r.height * 0.3f), ((Weapon)myGame.WeaponsList [i]).name + "\n" + ((Weapon)myGame.WeaponsList [i]).damage);	
+					if (GUI.Button (new Rect (0, r.height * 0.3f * i, r.width, r.height * 0.3f),((Item)myGame.WeaponsList [i]).name + "\n" + ((Item)myGame.WeaponsList [i]).amount.ToString ())){
+						if (player.money >= ((Item)myGame.WeaponsList [i]).buy){
+							player.inventory.Add (((Item)myGame.WeaponsList [i]));	
+							player.money -= ((Item)myGame.WeaponsList [i]).buy;
+							dialogue = "Thank you for your purchase!";
+							displayTradeMenu = false;
+						} else {
+							dialogue = "You don't have enough money. . .";	
+							displayTradeMenu = false;
+						}
+					}
 				}
+				
 			
 				GUI.EndScrollView ();
-			} 
+				break;
+			}
 		}
 	}
 }

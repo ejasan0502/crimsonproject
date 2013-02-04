@@ -1,3 +1,3 @@
-M4A1:10
-Glock:5
-Wrench:10
+M4A1:10:130:45
+Glock:5:90:10
+Wrench:10:40:15
