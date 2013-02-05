@@ -10,7 +10,7 @@ public class PlayerReceiver : MonoBehaviour
 	public AudioClip smallDmg;
 	public AudioClip bigDmg;
 	public AudioClip Death;
-	int hitPoints;
+	public int hitPoints;
 	int curLevel = 2;
 	int curXP;
 	int MAX_LEVEL = 10; // set max level

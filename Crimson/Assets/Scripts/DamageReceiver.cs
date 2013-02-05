@@ -4,10 +4,12 @@ using System.Collections;
 public class DamageReceiver : MonoBehaviour 
 {
 	public int hitPoints = 100;
+	public int MAXHP = 100;
 	public int xp;
 	public Transform explosion;
 	public Rigidbody replaceDead;
 	GameObject player;
+	
 	
 	
 	
@@ -26,8 +28,24 @@ public class DamageReceiver : MonoBehaviour
 		
 	}
 	
+	void GiveHealth (int hp)
+	{
+		hitPoints += hp;
+		Debug.Log("Health given");
+		
+		// set object to maxhp if over
+		if (hitPoints >= MAXHP) hitPoints = MAXHP;
+	}
+	
 	void Detonate ()
 	{
+		// check if player owned
+		if (gameObject.tag != "FriendlyRobot")
+		{
+			// find and send player xp
+			player = GameObject.Find("Player");
+			player.SendMessage("giveXP", xp);
+		}
 		// destroy the object
 		Destroy(gameObject);
 		
@@ -74,9 +92,7 @@ public class DamageReceiver : MonoBehaviour
 			dead.angularVelocity = rigidbody.angularVelocity;
 		}
 		
-		// find and send player xp
-		player = GameObject.Find("Player");
-		player.SendMessage("giveXP", xp);
+		
 	}
 	
 	

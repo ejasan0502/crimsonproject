@@ -1,13 +1,17 @@
 using UnityEngine;
 using System.Collections;
 
-public class SentryGun : MonoBehaviour 
+public class AssaultBot : MonoBehaviour 
 {
+	public float moveSpeed;
+	public float rotationSpeed;
 	public float range;
 	public float atkAngle;
+	public float seekRange;
 	GameObject target;
 	public bool targetIsPlayer;
 	GameObject player;
+	float targDist;
 	
 	// set target to player
 	void Start () 
@@ -20,7 +24,7 @@ public class SentryGun : MonoBehaviour
 	{
 		// update target
 		target = null;
-	
+		
 		// if the object targets the player and can see them target player
 		if (targetIsPlayer == true && CanSeeTarget(player))
 		{
@@ -32,6 +36,8 @@ public class SentryGun : MonoBehaviour
 		{
 			if (GameObject.FindWithTag("FriendlyRobot"))
 				target = GameObject.FindWithTag("FriendlyRobot");
+			else 
+				target = GameObject.FindWithTag("Player");
 		}
 		else if (targetIsPlayer == false)
 		{
@@ -44,14 +50,19 @@ public class SentryGun : MonoBehaviour
 		
 		// check if we have a target
 		if (target == null) return;
+		
+		// Rotate towards target	
+		Quaternion targetRotation = Quaternion.LookRotation (target.transform.position - transform.position, Vector3.up);
+		transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+		
+		// Move towards target to point seekRange
+		targDist = Vector3.Distance(transform.position, target.transform.position);
+		if (targDist > seekRange)
+			transform.position += transform.forward * moveSpeed * Time.deltaTime;
+		
 		// check if target is in sight to fire
 		if (!CanSeeTarget(target)) return;
-	
-		// Rotate towards target	
-		Vector3 targetPoint = target.transform.position;
-		Quaternion targetRotation = Quaternion.LookRotation (targetPoint - transform.position, Vector3.up);
-		transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 2.0f);
-
+		
 		// start firing when close to the correct angle
 		var forward = transform.TransformDirection(Vector3.forward);
 		var targetDir = target.transform.position - transform.position;
