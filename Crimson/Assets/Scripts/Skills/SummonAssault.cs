@@ -1,11 +1,11 @@
 using UnityEngine;
 using System.Collections;
 
-// IN GAME: Use key 1
-// summons a basic turret to fight for the player
-public class SummonTurret : MonoBehaviour 
+// IN GAME: Use Key 2
+// summons an assault robot to help the player
+public class SummonAssault : MonoBehaviour 
 {
-	public GameObject tur;
+	public GameObject bot;
 	public bool hasSkill;
 	public float cooldown = 15;
 	float useTime;
@@ -13,17 +13,17 @@ public class SummonTurret : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		if (Input.GetKeyDown(KeyCode.Alpha1) && Time.time > (useTime + cooldown))
+		if (Input.GetKeyDown(KeyCode.Alpha2) && Time.time > (useTime + cooldown))
 		{
 			useTime = Time.time;
-			Instantiate(tur, transform.position, Quaternion.identity);
+			Instantiate(bot, transform.position, Quaternion.identity);
 		}
 	}
 		
 	// set useTime so skill can be used right away
 	void Awake ()
 	{
-		tur.tag = "FriendlyRobot";
+		bot.tag = "FriendlyRobot";
 		useTime = Time.time - cooldown;
 	}
 }

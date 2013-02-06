@@ -40,6 +40,8 @@ public class SentryGun : MonoBehaviour
 				target = GameObject.FindWithTag("Enemy");
 				Debug.Log(target.tag + " Targeted!");
 			}
+			else if (GameObject.FindWithTag ("EnemyRobot"))
+				target = GameObject.FindWithTag("EnemyRobot");
 		}
 		
 		// check if we have a target

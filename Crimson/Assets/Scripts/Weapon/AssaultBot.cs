@@ -13,7 +13,6 @@ public class AssaultBot : MonoBehaviour
 	GameObject player;
 	float targDist;
 	
-	// set target to player
 	void Start () 
 	{
 		player = GameObject.FindWithTag("Player");
@@ -46,6 +45,8 @@ public class AssaultBot : MonoBehaviour
 				target = GameObject.FindWithTag("Enemy");
 				Debug.Log(target.tag + " Targeted!");
 			}
+			else if (GameObject.FindWithTag ("EnemyRobot"))
+				target = GameObject.FindWithTag("EnemyRobot");
 		}
 		
 		// check if we have a target
