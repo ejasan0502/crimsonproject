@@ -6,7 +6,6 @@ using System.Collections;
 public class SummonTurret : MonoBehaviour 
 {
 	public GameObject tur;
-	public bool hasSkill;
 	public float cooldown = 15;
 	float useTime;
 	

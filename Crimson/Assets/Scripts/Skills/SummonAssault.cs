@@ -6,7 +6,6 @@ using System.Collections;
 public class SummonAssault : MonoBehaviour 
 {
 	public GameObject bot;
-	public bool hasSkill;
 	public float cooldown = 15;
 	float useTime;
 	

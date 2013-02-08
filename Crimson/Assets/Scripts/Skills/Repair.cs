@@ -9,6 +9,7 @@ public class Repair : MonoBehaviour
 	float healAmount = 50;
 	float cooldown = 30;
 	float useTime;
+	bool hasSkill;
 	
 	// Update is called once per frame
 	void Update () 
@@ -26,13 +27,12 @@ public class Repair : MonoBehaviour
 			
 				if (hit.rigidbody && hit.tag == "FriendlyRobot") 
 				{
+					Debug.Log("Healing");
 					// apply damage to hit object
 					hit.SendMessageUpwards("GiveHealth", healAmount, SendMessageOptions.DontRequireReceiver);
 				}
 			}
 		}
-		else if (Input.GetKeyDown(KeyCode.R))
-			Debug.Log("Spell on cooldown");
 	}
 	
 	void Awake()
