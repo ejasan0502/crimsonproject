@@ -8,7 +8,6 @@ public class SelfDestruct : MonoBehaviour
 	public GameObject explosion;
 	GameObject[] targ;
 	GameObject player;
-	public bool hasSkill;
 	GameObject target;
 	
 	int closest = 0;
@@ -45,11 +44,14 @@ public class SelfDestruct : MonoBehaviour
 		// if player hits e use skill
 		if (Input.GetKeyDown(KeyCode.E))
 		{
-			Destroy(target);
+			if (target)
+			{
+				Destroy(target);
 			
-			Instantiate(explosion, target.transform.position, target.transform.rotation);
+				Instantiate(explosion, target.transform.position, target.transform.rotation);
 			
-			Explode ();
+				Explode ();
+			}
 		}
 	}
 	

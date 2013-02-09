@@ -1,12 +1,28 @@
 private var motor : CharacterMotor;
 
 // Use this for initialization
-function Awake () {
+function Awake () 
+{
+	Screen.lockCursor = true;
 	motor = GetComponent(CharacterMotor);
 }
 
 // Update is called once per frame
-function Update () {
+function Update () 
+{
+	// unlock or lock the curser with F1
+	if (Input.GetKeyDown (KeyCode.F1))
+	{
+		Debug.Log("Key F1 Hit");
+		if (Screen.lockCursor == false) 
+		{
+			Screen.lockCursor = true;
+		}
+		else if (Screen.lockCursor == true)
+		{
+			Screen.lockCursor = false;
+		}
+	}
 	// Get the input vector from kayboard or analog stick
 	var directionVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 	

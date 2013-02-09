@@ -3,8 +3,8 @@ using System.Collections;
 
 public class DamageReceiver : MonoBehaviour 
 {
-	public int hitPoints = 100;
-	public int MAXHP = 100;
+	public float hitPoints = 100;
+	public float MAXHP = 100;
 	public int xp;
 	public Transform explosion;
 	public Rigidbody replaceDead;

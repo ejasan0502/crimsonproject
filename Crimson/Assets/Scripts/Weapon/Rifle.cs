@@ -19,6 +19,7 @@ public class Rifle : MonoBehaviour
 	float m_LastFrameShot = -1;
 	
 	public bool IsOnPlayer;
+	public bool IsAutomatic;
 	
 	// Use this for initialization
 	void Start () 
@@ -36,11 +37,24 @@ public class Rifle : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		if (Input.GetButtonDown("Fire1"))
+		if (IsAutomatic == true)
 		{
-			if (bulletsLeft > 0)
+			if (Input.GetButton("Fire1"))
 			{
-				BroadcastMessage("Fire");
+				if (bulletsLeft > 0)
+				{
+					BroadcastMessage("Fire");
+				}
+			}
+		}
+		else
+		{
+			if (Input.GetButtonDown("Fire1"))
+			{
+				if (bulletsLeft > 0)
+				{
+					BroadcastMessage("Fire");
+				}
 			}
 		}
 	}

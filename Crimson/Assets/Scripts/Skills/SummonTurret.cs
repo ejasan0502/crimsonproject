@@ -6,14 +6,12 @@ using System.Collections;
 public class SummonTurret : MonoBehaviour 
 {
 	public GameObject tur;
-	public bool hasSkill;
 	public float cooldown = 15;
 	float useTime;
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		tur.tag = "FriendlyRobot";
 		if (Input.GetKeyDown(KeyCode.Alpha1) && Time.time > (useTime + cooldown))
 		{
 			useTime = Time.time;
@@ -24,6 +22,7 @@ public class SummonTurret : MonoBehaviour
 	// set useTime so skill can be used right away
 	void Awake ()
 	{
+		tur.tag = "FriendlyRobot";
 		useTime = Time.time - cooldown;
 	}
 }

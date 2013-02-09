@@ -25,6 +25,8 @@ public class Game : MonoBehaviour
 	public ArrayList VendorList;
 	public ArrayList WeaponsList;
 	
+	public SoundManager sm;
+	
 	void Awake ()
 	{
 		DontDestroyOnLoad (this);	
@@ -37,7 +39,6 @@ public class Game : MonoBehaviour
 		for (int i = 0; i < 3; i++) {
 			CharacterList.Add (null);	
 		}
-		
 		QuestList = new ArrayList ();
 		MarksmanSkills = new ArrayList ();
 		EngineerSkills = new ArrayList ();
@@ -51,6 +52,11 @@ public class Game : MonoBehaviour
 		GenerateSkillsList ();
 		GenerateVendorList ();
 		GenerateWeaponsList();
+	}
+	
+	void Start(){
+		sm = GameObject.Find ("SoundManager").GetComponent<SoundManager>();
+		sm.playMusic (0);	
 	}
 	
 	private void GetCharData ()

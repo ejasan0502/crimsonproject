@@ -93,6 +93,11 @@ public class Pickup : MonoBehaviour {
 			GameObject.Find ("Pistol1").GetComponent<Weapon_Equip>().EquipWeapon("Pistol1");
 			Destroy(other.gameObject);
 			break;
+		case "Wall":
+			break;
+		case "TutorialPortal":
+			GameObject.Find ("TutorialGuide").GetComponent<NPC_TutorialGuide>().entrance = true;
+			break;
 		}
 	}
 }

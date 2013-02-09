@@ -3,14 +3,14 @@ using System.Collections;
 
 public class PlayerReceiver : MonoBehaviour 
 {
-	public int BASE_HP;
-	public int HP_SCALE;// amount of hp to gain per level
+	public float BASE_HP;
+	public float HP_SCALE;// amount of hp to gain per level
 	public int BASE_XP;// base amount of xp required to level
 	public int XP_SCALE;// how much more xp will be required next level. min >1
 	public AudioClip smallDmg;
 	public AudioClip bigDmg;
 	public AudioClip Death;
-	public int hitPoints;
+	public float hitPoints;
 	int curLevel = 2;
 	int curXP;
 	int MAX_LEVEL = 10; // set max level
@@ -18,7 +18,7 @@ public class PlayerReceiver : MonoBehaviour
 	GameObject plr;
 	int[] xpToLevel;
 	float gotHit;
-	int maxHP;
+	float maxHP;
 	Rect deadMsg;
 	
 	
@@ -42,7 +42,7 @@ public class PlayerReceiver : MonoBehaviour
 		for (int i=1; i < MAX_LEVEL; i++)
 		{
 			xpToLevel[i] = xpToLevel[i-1] * XP_SCALE;
-			Debug.Log("Level " + i + " = " + xpToLevel[i]);
+		//	Debug.Log("Level " + i + " = " + xpToLevel[i]);
 		}
 	}
 	

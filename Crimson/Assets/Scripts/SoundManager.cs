@@ -30,7 +30,6 @@ public class SoundManager : MonoBehaviour {
 		se.playOnAwake = true;
 		
 		setVolume(0.5f);
-		playMusic (0);
 	}
 	
 	// Sound Effects
