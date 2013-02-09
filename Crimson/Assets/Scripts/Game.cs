@@ -187,7 +187,7 @@ public class Game : MonoBehaviour
 		if (tutorial){
 			Application.LoadLevel ("Tutorial");	
 		} else if (!tutorial) {
-			Application.LoadLevel ("GameTest");
+			Application.LoadLevel ("testing");
 		}
 	}
 	

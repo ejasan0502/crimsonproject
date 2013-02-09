@@ -16,7 +16,6 @@ public class Pickup : MonoBehaviour {
 		myGame = GameObject.Find ("Game").GetComponent<Game>();
 		player = myGame.GetPlayerChar ();
 		sm = GameObject.Find ("SoundManager").GetComponent<SoundManager>();
-		lockMouse = 0;
 	}
 	
 	void OnGUI(){

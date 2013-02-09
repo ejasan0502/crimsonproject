@@ -22,6 +22,8 @@ public class MainMenuScreen : MonoBehaviour {
 	}
 	
 	void OnGUI(){		
+		GUI.Label (new Rect(0,0,Screen.width, Screen.height),(Texture2D)Resources.Load ("Textures/CrimsonSwirl"));
+		
 		menuStyle.fontSize = Mathf.RoundToInt (Screen.height * 0.15f);	
 		GUI.Label(new Rect(Screen.width * 0.20f, Screen.height * 0.3f, Screen.width * 0.4f, Screen.height * 0.2f),"Crimson",menuStyle);
 		
