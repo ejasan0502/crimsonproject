@@ -9,7 +9,7 @@ public class CharacterCreationScreen : MonoBehaviour
 	private Game myGame;
 	
 	private string charName;
-	private string charClass;
+	//private string charClass;
 	public int charNum;
 	
 	// Use this for initialization
@@ -23,7 +23,7 @@ public class CharacterCreationScreen : MonoBehaviour
 		menuStyle.font = (Font)Resources.Load ("Fonts/After_Shok");
 		
 		charName = "Enter Here";
-		charClass = "Marksman";
+		//charClass = "Marksman";
 	}
 	
 	// Update is called once per frame
@@ -39,6 +39,7 @@ public class CharacterCreationScreen : MonoBehaviour
 		GUI.Label (new Rect (0, Screen.height * 0.1f, Screen.width * 0.3f, Screen.height * 0.1f), "Name", menuStyle);
 		charName = GUI.TextField (new Rect (Screen.width * 0.35f, Screen.height * 0.1f, Screen.width * 0.5f, Screen.height * 0.1f), charName, 25, menuStyle);
 			
+		/*
 		GUI.Label (new Rect (0, Screen.height * 0.25f, Screen.width * 0.3f, Screen.height * 0.1f), "Class", menuStyle);
 		if (GUI.Button (new Rect (Screen.width * 0.35f, Screen.height * 0.25f, Screen.width * 0.3f, Screen.height * 0.1f), charClass, menuStyle)) {
 			if (charClass == "Marksman")
@@ -46,13 +47,14 @@ public class CharacterCreationScreen : MonoBehaviour
 			else
 				charClass = "Marksman";
 		}
+		*/
 			
 		if (GUI.Button (new Rect (Screen.width * 0.2f, Screen.height * 0.8f, Screen.width * 0.4f, Screen.height * 0.1f), "Create", menuStyle)) {	
 			ArrayList charInv = new ArrayList();
 			int charMoney = 0;
 			charInv.Add ("");
 			
-			myGame.CharacterList.Insert (myGame.CharacterSlotSelected, new Character(myGame.CharacterSlotSelected, charName, charClass, charInv, charMoney,myGame.QuestList,null,null));
+			myGame.CharacterList.Insert (myGame.CharacterSlotSelected, new Character(myGame.CharacterSlotSelected, charName, null, charInv, charMoney,myGame.QuestList,null,null));
 			myGame.SaveCharData();
 			
 			Instantiate (Resources.Load ("Prefabs/Character Selection Menu"));

@@ -5,6 +5,8 @@ using System;
 
 public class Game : MonoBehaviour
 {	
+	public bool tutorial;
+	
 	// Settings
 	public float musicVolume;
 	public float effectsVolume;
@@ -14,6 +16,7 @@ public class Game : MonoBehaviour
 	public ArrayList CharacterList;
 	public int CharacterSlotSelected;
 	public Character player;
+	public Region.area playerArea;
 	
 	// Game
 	public ArrayList QuestList;
@@ -40,7 +43,9 @@ public class Game : MonoBehaviour
 		EngineerSkills = new ArrayList ();
 		VendorList = new ArrayList();
 		WeaponsList = new ArrayList();
-
+		
+		playerArea = Region.area.none;
+		
 		GetCharData ();
 		GenerateQuestList ();
 		GenerateSkillsList ();
@@ -169,6 +174,15 @@ public class Game : MonoBehaviour
 	public void SetPlayerChar (int index)
 	{
 		player = (Character)CharacterList [index];	
+		if (player.charClass == "" || player.charClass == null){
+			tutorial = true;	
+		}
+		
+		if (tutorial){
+			Application.LoadLevel ("Tutorial");	
+		} else if (!tutorial) {
+			Application.LoadLevel ("GameTest");
+		}
 	}
 	
 	public Character GetPlayerChar ()

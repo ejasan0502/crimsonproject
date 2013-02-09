@@ -48,7 +48,6 @@ public class CharacterSelectionScreen : MonoBehaviour {
 				menuStyle.fontSize = Mathf.RoundToInt (Screen.height * 0.05f);
 				if (GUI.Button (new Rect(Screen.width * 0.35f * i, Screen.height * 0.3f, Screen.width * 0.3f, Screen.height * 0.2f), str, menuStyle)){
 					myGame.SetPlayerChar(i);
-					Application.LoadLevel ("GameTest");
 				}
 			}
 		}

@@ -83,6 +83,16 @@ public class Pickup : MonoBehaviour {
 			player.inventory.Add (other.gameObject.name);
 			Destroy(other.gameObject);
 			break;
+		case "Marksman":
+			Debug.Log ("Marksman");
+			GameObject.Find ("Rifle1").GetComponent<Weapon_Equip>().EquipWeapon("Rifle1");
+			Destroy(other.gameObject);
+			break;
+		case "Engineer":
+			Debug.Log ("Engineer");
+			GameObject.Find ("Pistol1").GetComponent<Weapon_Equip>().EquipWeapon("Pistol1");
+			Destroy(other.gameObject);
+			break;
 		}
 	}
 }

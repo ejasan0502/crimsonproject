@@ -28,7 +28,8 @@ public class NPC : MonoBehaviour
 		vendor,
 		merchant,
 		medic,
-		marine
+		marine,
+		tutorial
 	}
 	
 	public string name;
