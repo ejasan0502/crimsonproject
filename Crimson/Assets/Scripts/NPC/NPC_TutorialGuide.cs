@@ -56,7 +56,6 @@ public class NPC_TutorialGuide : MonoBehaviour
 			message = "Rookie! We are under attack.";
 			yield return new WaitForSeconds(3.0f);
 			message = "Grab a weapon! \n(Rifle for Marksman or Pistol for Engineer)";
-			//GameObject.Find ("SoundManager").GetComponent<SoundManager>().playMusic (1);
 		}
 		
 		if (WeaponAcquired) {
@@ -77,7 +76,11 @@ public class NPC_TutorialGuide : MonoBehaviour
 		if (entrance){
 			message = "You have fainted.";
 			yield return new WaitForSeconds(3.0f);
+			message = "Loading next scene . . .";
+			myGame.SaveCharData ();
+			yield return new WaitForSeconds(3.0f);
 			Destroy(this.gameObject);
+			myGame.tutorial = false;
 			Application.LoadLevel ("GameTest");
 		}
 	}

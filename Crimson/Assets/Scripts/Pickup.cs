@@ -3,6 +3,10 @@ using System.Collections;
 
 public class Pickup : MonoBehaviour {
 	
+	// This class detects any object that collides with the player.
+	// This class generates a crosshair
+	
+	
 	private Game myGame;
 	private Character player;
 	private SoundManager sm;
@@ -12,6 +16,11 @@ public class Pickup : MonoBehaviour {
 		myGame = GameObject.Find ("Game").GetComponent<Game>();
 		player = myGame.GetPlayerChar ();
 		sm = GameObject.Find ("SoundManager").GetComponent<SoundManager>();
+		lockMouse = 0;
+	}
+	
+	void OnGUI(){
+		GUI.DrawTexture (new Rect(Screen.width/2 - 25,Screen.height/2 - 25,50,50),(Texture2D)Resources.Load ("Textures/crosshair"));	
 	}
 	
 	void OnControllerColliderHit(ControllerColliderHit other){
