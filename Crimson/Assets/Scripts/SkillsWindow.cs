@@ -17,6 +17,7 @@ public class SkillsWindow : MonoBehaviour
 	int playerLvl;
 	string charClass;
 	bool windowOpen = false;
+	bool used;
 	
 	// skill bools
 	bool PistolMaster, RifleMaster, BurningShot, QuickShot, PoisonShot,
@@ -71,6 +72,7 @@ public class SkillsWindow : MonoBehaviour
 			Screen.lockCursor = false;
 			playerObj.GetComponent<MouseLook> ().enabled = false;
 			Camera.mainCamera.GetComponent<MouseLook> ().enabled = false;
+			used = false;
 			
 			if (charClass == "Marksman")
 			{
@@ -84,9 +86,13 @@ public class SkillsWindow : MonoBehaviour
 		}
 		else
 		{
-			playerObj.GetComponent<MouseLook> ().enabled = true;
-			Camera.mainCamera.GetComponent<MouseLook> ().enabled = true;
-			Screen.lockCursor = true;
+			if (!used)
+			{
+				playerObj.GetComponent<MouseLook> ().enabled = true;
+				Camera.mainCamera.GetComponent<MouseLook> ().enabled = true;
+				Screen.lockCursor = true;
+				used = true;
+			}
 		}
 	}
 	
