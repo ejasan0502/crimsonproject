@@ -42,7 +42,7 @@ public class PlayerReceiver : MonoBehaviour
 		for (int i=1; i < MAX_LEVEL; i++)
 		{
 			xpToLevel[i] = xpToLevel[i-1] * XP_SCALE;
-		//	Debug.Log("Level " + i + " = " + xpToLevel[i]);
+			Debug.Log("Level " + i + " = " + xpToLevel[i]);
 		}
 	}
 	
@@ -53,6 +53,7 @@ public class PlayerReceiver : MonoBehaviour
 		curXP += amount;
 		
 		// check if player has leveled
+		Debug.Log(curXP + " / " + xpToLevel[curLevel]);
 		if (curXP >= xpToLevel[curLevel])
 		{
 			Debug.Log("Player Leveled");
