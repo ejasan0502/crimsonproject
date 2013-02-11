@@ -55,8 +55,8 @@ public class Game : MonoBehaviour
 	}
 	
 	void Start(){
-		sm = GameObject.Find ("SoundManager").GetComponent<SoundManager>();
-		sm.playMusic (0);	
+//		sm = GameObject.Find ("SoundManager").GetComponent<SoundManager>();
+//		sm.playMusic (0);	
 	}
 	
 	private void GetCharData ()

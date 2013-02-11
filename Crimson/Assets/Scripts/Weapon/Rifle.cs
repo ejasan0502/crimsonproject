@@ -66,34 +66,37 @@ public class Rifle : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		// check if weapon stats are current, if not set
-		if (curWeapon != Character.EquipWeapon)
+		if (IsOnPlayer)
 		{
-			range = Character.EquipWeapon.MaxRange;
-			fireRate = Character.EquipWeapon.AttackSpeed;
-			minDmg = Character.EquipWeapon.MinDamage;
-			maxDmg = Character.EquipWeapon.MaxDamage;
-			reloadTime = Character.EquipWeapon.ReloadTime;
-			
-			curWeapon = Character.EquipWeapon;
-		}
-		if (IsAutomatic == true)
-		{
-			if (Input.GetButton("Fire1"))
+			// check if weapon stats are current, if not set
+			if (curWeapon != Character.EquipWeapon)
 			{
-				if (bulletsLeft > 0)
+				range = Character.EquipWeapon.MaxRange;
+				fireRate = Character.EquipWeapon.AttackSpeed;
+				minDmg = Character.EquipWeapon.MinDamage;
+				maxDmg = Character.EquipWeapon.MaxDamage;
+				reloadTime = Character.EquipWeapon.ReloadTime;
+			
+				curWeapon = Character.EquipWeapon;
+			}
+			if (IsAutomatic == true)
+			{
+				if (Input.GetButton("Fire1"))
 				{
-					BroadcastMessage("Fire");
+					if (bulletsLeft > 0)
+					{
+						gameObject.SendMessage("Fire");
+					}
 				}
 			}
-		}
-		else
-		{
-			if (Input.GetButtonDown("Fire1"))
+			else
 			{
-				if (bulletsLeft > 0)
+				if (Input.GetButtonDown("Fire1"))
 				{
-					BroadcastMessage("Fire");
+					if (bulletsLeft > 0)
+					{
+						gameObject.SendMessage("Fire");
+					}
 				}
 			}
 		}

@@ -43,7 +43,7 @@ public class DamageReceiver : MonoBehaviour
 		if (gameObject.tag != "FriendlyRobot")
 		{
 			// find and send player xp
-			player = GameObject.Find("Player");
+			player = GameObject.FindWithTag("Player");
 			player.SendMessage("giveXP", xp);
 		}
 		// destroy the object

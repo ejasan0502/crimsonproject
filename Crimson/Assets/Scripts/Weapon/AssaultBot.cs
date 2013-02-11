@@ -58,7 +58,7 @@ public class AssaultBot : MonoBehaviour
 		
 		// Move towards target to point seekRange
 		targDist = Vector3.Distance(transform.position, target.transform.position);
-		if (targDist > seekRange)
+		if (targDist > seekRange && targDist < 40)
 			transform.position += transform.forward * moveSpeed * Time.deltaTime;
 		
 		// check if target is in sight to fire
