@@ -121,9 +121,9 @@ public class Chest : MonoBehaviour
 	{
 		for (int i=0; i<x; i++)
 		{
-			loot.Add(new Item());
-			loot[i].Name = "I:" + Random.Range(0, 100);
+			loot.Add(ItemGenerator.Create());
 		}
+		
 		used = true;
 	}
 	

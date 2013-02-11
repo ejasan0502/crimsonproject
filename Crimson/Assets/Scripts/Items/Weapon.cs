@@ -53,4 +53,17 @@ public class Weapon : Item
 		get {return atkSpeed;}
 		set {atkSpeed = value;}
 	}
+	
+	public override string Tooltip()
+	{
+		return Name + "\n" + 
+			Rarity + "\n" +
+			"Durability: " + CurDurability + " / " + MaxDurability + "\n" +
+			"Damage: " + minDmg + " - " + maxDmg + "\n" +
+			"Attack Speed: " + atkSpeed + "\n" +
+			"Reload Time: " + reloadTime + "\n" +
+			"Range: " + range + "\n\n\n" +
+			"Value: " + Value;
+					
+	}
 }

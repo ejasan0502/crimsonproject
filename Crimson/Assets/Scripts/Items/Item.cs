@@ -54,6 +54,14 @@ public class Item
 		set{ curDur = value;}
 	}
 	
+	// allows function to be overwriten by inheriting classes
+	public virtual string Tooltip()
+	{
+		return itemName + "\n" + 
+			itemRarity + "\n" +
+			"Durability: " + curDur + " / " + maxDur + "\n";
+			
+	}
 }
 
 public enum RarityTypes
