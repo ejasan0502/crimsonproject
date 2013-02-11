@@ -11,6 +11,11 @@ public class InventoryWindow : MonoBehaviour
 	public Vector2 scrollPosition;
 	public Rect r;
 	
+	// double click variables
+	private float clickTimer = 0;
+	private const float DELTA_TIMER = 0.5f;
+	private Item selectedItem;
+	
 	// tooltip variables
 	string tooltip = "";
 	
@@ -76,7 +81,42 @@ public class InventoryWindow : MonoBehaviour
 			{
 				if (cnt < Character.Inventory.Count)
 				{
-					GUI.Button(new Rect(20+ (x*btnWidth), 20+ (y*btnHeight), btnWidth, btnHeight), new GUIContent(Character.Inventory[cnt].Name, Character.Inventory[cnt].Tooltip()));
+					if (GUI.Button(new Rect(20+ (x*btnWidth), 20+ (y*btnHeight), btnWidth, btnHeight), new GUIContent(Character.Inventory[cnt].Name, Character.Inventory[cnt].Tooltip())))
+					{
+						// check if btn is double clicked
+						if (clickTimer != 0 && selectedItem != null)
+						{
+							if (Time.time - clickTimer < DELTA_TIMER)
+							{
+								Debug.Log("Clicked: " + Character.Inventory[cnt].Name);
+								
+								if (Character.EquipWeapon == null)
+								{
+									// equip weapon
+									Character.EquipWeapon = (Weapon) Character.Inventory[cnt];
+									Character.Inventory.RemoveAt(cnt);
+								}
+								else
+								{
+									Item temp = Character.EquipWeapon;
+									// swap weapon
+									Character.EquipWeapon = (Weapon) Character.Inventory[cnt];
+									Character.Inventory[cnt] = temp;
+								}
+								
+								clickTimer = 0;
+								selectedItem = null;
+							}
+							else
+								clickTimer = 0;
+						
+						}
+						else
+						{
+							clickTimer = Time.time;
+							selectedItem = Character.Inventory[cnt];
+						}
+					}
 				}
 				else
 				{

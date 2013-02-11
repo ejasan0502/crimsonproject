@@ -35,7 +35,7 @@ public static class ItemGenerator
 			weapon.Value = Random.Range(1, 20);
 			weapon.MinDamage = Random.Range(1,3);
 			weapon.MaxDamage = Random.Range(3,6);
-			weapon.MaxRange = Random.Range(50,70);
+			weapon.MaxRange = Random.Range(25,40);
 			weapon.ReloadTime = Random.Range(3,4);
 			weapon.AttackSpeed = Random.Range(0.6f, 0.9f);
 		}
@@ -45,7 +45,7 @@ public static class ItemGenerator
 			weapon.Value = Random.Range(15, 30);
 			weapon.MinDamage = Random.Range(2,4);
 			weapon.MaxDamage = Random.Range(4,8);
-			weapon.MaxRange = Random.Range(60,75);
+			weapon.MaxRange = Random.Range(35,50);
 			weapon.ReloadTime = Random.Range(2,3);
 			weapon.AttackSpeed = Random.Range(0.4f, 0.7f);
 		}
@@ -55,7 +55,7 @@ public static class ItemGenerator
 			weapon.Value = Random.Range(40, 60);
 			weapon.MinDamage = Random.Range(3,6);
 			weapon.MaxDamage = Random.Range(7,10);
-			weapon.MaxRange = Random.Range(70,80);
+			weapon.MaxRange = Random.Range(45,60);
 			weapon.ReloadTime = Random.Range(1,3);
 			weapon.AttackSpeed = Random.Range(0.3f, 0.5f);
 		}

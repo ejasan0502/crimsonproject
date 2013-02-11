@@ -22,6 +22,18 @@ public struct Character
 	
 	// inventory items
 	private static List<Item> inventoryList = new List<Item>();
+	public static List<Item> Inventory
+	{
+		get{return inventoryList;}
+	}
+	
+	// equipped items
+	private static Weapon equippedWeapon; 
+	public static Weapon EquipWeapon
+	{
+		get {return equippedWeapon;}
+		set {equippedWeapon = value;}
+	}
 		
 	public Character (int s, string n, string c, ArrayList i, float m, ArrayList qa, ArrayList qc, ArrayList sk)
 	{
@@ -57,8 +69,5 @@ public struct Character
 		staminaMax = s;
 	}
 	
-	public static List<Item> Inventory
-	{
-		get{return inventoryList;}
-	}
+	
 }

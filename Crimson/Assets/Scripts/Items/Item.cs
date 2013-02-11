@@ -8,9 +8,9 @@ public class Item
 	
 	public Item()
 	{
-		itemName = "Enter Name";
+		itemName = "Default";
 		itemRarity = RarityTypes.Common;
-		itemValue = 0;
+		itemValue = 1;
 		maxDur = 100;
 		curDur = maxDur;
 	}
