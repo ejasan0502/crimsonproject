@@ -8,7 +8,11 @@ public class DamageReceiver : MonoBehaviour
 	public int xp;
 	public Transform explosion;
 	public Rigidbody replaceDead;
+	public GameObject chest;
 	GameObject player;
+	
+	public int spawnChance;  // chance for a chest to spawn on death, in %
+	int ran;
 	
 	
 	
@@ -92,7 +96,16 @@ public class DamageReceiver : MonoBehaviour
 			dead.angularVelocity = rigidbody.angularVelocity;
 		}
 		
-		
+		// randomly spawn chest
+		if (chest)
+		{
+			ran = Random.Range(0, 100);
+			if (ran < spawnChance)
+			{
+				chest = (GameObject)Instantiate(chest, transform.position, transform.rotation);
+			
+			}
+		}
 	}
 	
 	

@@ -12,7 +12,7 @@ public class AssaultBot : MonoBehaviour
 	public bool targetIsPlayer;
 	GameObject player;
 	float targDist;
-	public bool ranged;
+	public bool ranged = true;
 	
 	void Start () 
 	{
@@ -68,11 +68,9 @@ public class AssaultBot : MonoBehaviour
 		// start firing when close to the correct angle
 		var forward = transform.TransformDirection(Vector3.forward);
 		var targetDir = target.transform.position - transform.position;
-		if (Vector3.Angle(forward, targetDir) < atkAngle){
-			if (ranged) SendMessage("Fire"); 
-			else {
-				Debug.Log ("Apply Damage");	
-			}
+		if (Vector3.Angle(forward, targetDir) < atkAngle)
+		{
+			SendMessage("Fire"); 
 		}
 	}
 	
