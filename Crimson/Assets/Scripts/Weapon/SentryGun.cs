@@ -5,7 +5,7 @@ public class SentryGun : MonoBehaviour
 {
 	public float range;
 	public float atkAngle;
-	GameObject target;
+	public GameObject target;
 	public bool targetIsPlayer;
 	GameObject player;
 	
@@ -31,17 +31,23 @@ public class SentryGun : MonoBehaviour
 		else if (targetIsPlayer == true && !CanSeeTarget(player))
 		{
 			if (GameObject.FindWithTag("FriendlyRobot"))
-				target = GameObject.FindWithTag("FriendlyRobot");
+			{
+				target = GetNearest("FriendlyRobot");
+			}
 		}
 		else if (targetIsPlayer == false)
 		{
+			// check if an enemy is in range and in sight
 			if (GameObject.FindWithTag ("Enemy"))
 			{
-				target = GameObject.FindWithTag("Enemy");
-				Debug.Log(target.tag + " Targeted!");
-			}
-			else if (GameObject.FindWithTag ("EnemyRobot"))
-				target = GameObject.FindWithTag("EnemyRobot");
+				target = GetNearest("Enemy");
+				
+				// if nearest enemy is not in sight find enemyrobot
+				if (!CanSeeTarget(target))
+				{
+					target = GetNearest("EnemyRobot");
+				}
+			}		
 		}
 		
 		// check if we have a target
@@ -74,5 +80,27 @@ public class SentryGun : MonoBehaviour
 			return hit.transform == tar.transform;
 
 		return false;
+	}
+	
+	private GameObject GetNearest(string tag)
+	{
+		float nearDistSqr = Mathf.Infinity;
+		GameObject[] nearObjs = GameObject.FindGameObjectsWithTag(tag);
+		GameObject target = null;
+		
+		// find the nearest object with tag
+		foreach (GameObject obj in nearObjs)
+		{
+			Vector3 pos = obj.transform.position;
+			float dist = (pos - transform.position).sqrMagnitude;
+			
+			if (dist < nearDistSqr)
+			{
+				target = obj;
+				nearDistSqr = dist;
+			}
+		}
+		
+		return target;
 	}
 }

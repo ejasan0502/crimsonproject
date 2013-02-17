@@ -50,7 +50,7 @@ public class SkillsWindow : MonoBehaviour
 		skillsInUse = new bool[8];
 		
 		// FIX TO BE BASED ON PLAYER LEVEL playerLvl = player.level;
-		playerLvl = 3;
+		playerLvl = player.level;
 		numSkills = playerLvl;
 		charClass = "Engineer";
 		Debug.Log(player.level);
@@ -62,6 +62,9 @@ public class SkillsWindow : MonoBehaviour
 		{
 			if (windowOpen == false) windowOpen = true;
 			else windowOpen = false;
+			
+			playerLvl = player.level;
+			numSkills = playerLvl;
 		}
 	}
 	
