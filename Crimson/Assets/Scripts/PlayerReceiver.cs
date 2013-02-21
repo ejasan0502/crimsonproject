@@ -18,7 +18,7 @@ public class PlayerReceiver : MonoBehaviour
 	GameObject plr;
 	int[] xpToLevel;
 	float gotHit;
-	float maxHP;
+	public float maxHP;
 	Rect deadMsg;
 	
 	
@@ -32,8 +32,8 @@ public class PlayerReceiver : MonoBehaviour
 		//curLevel = player.level;
 		curXP = player.curExp;
 		
-		maxHP = BASE_HP + (curLevel * HP_SCALE);
-		hitPoints = maxHP;
+		maxHP = player.healthMax; //maxHP = BASE_HP + (curLevel * HP_SCALE);
+		hitPoints = player.health;
 		
 		xpToLevel = new int[MAX_LEVEL];
 		

@@ -27,6 +27,8 @@ public class Game : MonoBehaviour
 	
 	public SoundManager sm;
 	
+	public bool offset;
+	
 	void Awake ()
 	{
 		DontDestroyOnLoad (this);	
@@ -56,7 +58,14 @@ public class Game : MonoBehaviour
 	
 	void Start(){
 //		sm = GameObject.Find ("SoundManager").GetComponent<SoundManager>();
-//		sm.playMusic (0);	
+//		sm.playMusic (0);
+		if (offset){
+			CharacterList.Insert (0, new Character(0, "Player", null, null, 0, QuestList, null, null));	
+		}
+	}
+	
+	void Update(){
+			
 	}
 	
 	private void GetCharData ()

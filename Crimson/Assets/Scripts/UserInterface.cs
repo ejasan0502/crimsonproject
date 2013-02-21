@@ -8,7 +8,7 @@ public class UserInterface : MonoBehaviour
 	public GUIStyle menuStyle;
 	private Game myGame;
 	private SoundManager sm;
-	private Character player;
+	private PlayerReceiver player;
 	private GameObject playerObj;
 	public bool display;
 	public bool inventory;
@@ -26,7 +26,7 @@ public class UserInterface : MonoBehaviour
 		
 		myGame = (Game)GameObject.Find ("Game").GetComponent<Game> ();
 		sm = (SoundManager)GameObject.Find ("SoundManager").GetComponent<SoundManager> ();
-		player = myGame.GetPlayerChar ();
+		player = (PlayerReceiver)GameObject.Find ("Player").GetComponent<PlayerReceiver>();
 		playerObj = GameObject.Find ("Player");
 		
 		menuStyle = new GUIStyle ();
@@ -58,11 +58,11 @@ public class UserInterface : MonoBehaviour
 			
 			Rect pos = new Rect (Screen.width * 0.0125f, Screen.height * 0.05f, Screen.width * 0.3f, Screen.height * 0.075f);
 			GUI.DrawTexture (pos, background, ScaleMode.StretchToFill, true);
-			GUI.DrawTexture (new Rect (pos.x, pos.y, pos.width * (player.health / player.healthMax), pos.height), foreground, ScaleMode.StretchToFill, true);
+			GUI.DrawTexture (new Rect (pos.x, pos.y, pos.width * (player.hitPoints / player.maxHP), pos.height), foreground, ScaleMode.StretchToFill, true);
 			
-			pos = new Rect (Screen.width * 0.0125f, Screen.height * 0.13f, Screen.width * 0.3f, Screen.height * 0.035f);
-			GUI.DrawTexture (pos, background, ScaleMode.StretchToFill, true);
-			GUI.DrawTexture (new Rect (pos.x, pos.y, pos.width * (player.stamina / player.staminaMax), pos.height), foreground2, ScaleMode.StretchToFill, true);
+			//pos = new Rect (Screen.width * 0.0125f, Screen.height * 0.13f, Screen.width * 0.3f, Screen.height * 0.035f);
+			//GUI.DrawTexture (pos, background, ScaleMode.StretchToFill, true);
+			//GUI.DrawTexture (new Rect (pos.x, pos.y, pos.width * (player.stamina / player.staminaMax), pos.height), foreground2, ScaleMode.StretchToFill, true);
 		}
 		
 		if (!inventory){
