@@ -15,6 +15,7 @@ public class UserInterface : MonoBehaviour
 	public bool charWindow;
 	public bool skills;
 	public bool quests;
+	public bool pause;
 	public Texture2D background;
 	public Texture2D foreground;
 	public Texture2D foreground2;
@@ -47,6 +48,13 @@ public class UserInterface : MonoBehaviour
 		charWindow = false;
 		skills = false;
 		quests = false;
+		pause = false;
+	}
+	
+	void Update(){
+		if (Input.GetKeyDown(KeyCode.Escape)){
+			
+		}
 	}
 	
 	void OnGUI ()
@@ -63,6 +71,16 @@ public class UserInterface : MonoBehaviour
 			//pos = new Rect (Screen.width * 0.0125f, Screen.height * 0.13f, Screen.width * 0.3f, Screen.height * 0.035f);
 			//GUI.DrawTexture (pos, background, ScaleMode.StretchToFill, true);
 			//GUI.DrawTexture (new Rect (pos.x, pos.y, pos.width * (player.stamina / player.staminaMax), pos.height), foreground2, ScaleMode.StretchToFill, true);
+		}
+		
+		if (!pause){
+			if (Input.GetKeyDown (KeyCode.Escape)) {
+				Debug.Log ("Pause open");
+				this.gameObject.AddComponent<PauseMenuScreen>();
+				pause = true;
+			}
+		} else if (GetComponent<PauseMenuScreen>() == null && Input.GetKeyDown (KeyCode.Escape)){
+			pause = false;	
 		}
 		
 		if (!inventory){
