@@ -51,7 +51,8 @@ public class ToolAtk : MonoBehaviour
 	void Attack ()
 	{
 		// swing weapon
-		animation.Play();
+		if (animation)
+			animation.Play();
 		
 		//check if weapon hits
 		Vector3 direction = transform.TransformDirection(Vector3.forward);

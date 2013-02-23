@@ -8,9 +8,9 @@ public class Item
 	
 	public Item()
 	{
-		itemName = "Enter Name";
+		itemName = "Default";
 		itemRarity = RarityTypes.Common;
-		itemValue = 0;
+		itemValue = 1;
 		maxDur = 100;
 		curDur = maxDur;
 	}
@@ -54,6 +54,14 @@ public class Item
 		set{ curDur = value;}
 	}
 	
+	// allows function to be overwriten by inheriting classes
+	public virtual string Tooltip()
+	{
+		return itemName + "\n" + 
+			itemRarity + "\n" +
+			"Durability: " + curDur + " / " + maxDur + "\n";
+			
+	}
 }
 
 public enum RarityTypes

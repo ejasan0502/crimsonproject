@@ -6,6 +6,7 @@ public class NPC_TutorialGuide : MonoBehaviour
 	
 	private Game myGame;
 	private Character player;
+	private GameObject playerObj;
 	private GUIStyle menuStyle;
 	private string message;
 	public bool start;
@@ -18,6 +19,7 @@ public class NPC_TutorialGuide : MonoBehaviour
 	{
 		myGame = GameObject.Find ("Game").GetComponent<Game> ();
 		player = myGame.GetPlayerChar ();
+		playerObj = GameObject.Find("Player");
 		
 		menuStyle = new GUIStyle ();
 		menuStyle.fontSize = Mathf.RoundToInt (Screen.height * 0.025f);
@@ -56,7 +58,6 @@ public class NPC_TutorialGuide : MonoBehaviour
 			message = "Rookie! We are under attack.";
 			yield return new WaitForSeconds(3.0f);
 			message = "Grab a weapon! \n(Rifle for Marksman or Pistol for Engineer)";
-			//GameObject.Find ("SoundManager").GetComponent<SoundManager>().playMusic (1);
 		}
 		
 		if (WeaponAcquired) {
@@ -77,8 +78,16 @@ public class NPC_TutorialGuide : MonoBehaviour
 		if (entrance){
 			message = "You have fainted.";
 			yield return new WaitForSeconds(3.0f);
+			message = "Loading next scene . . .";
+			playerObj.GetComponent<MouseLook> ().enabled = false;
+			Camera.mainCamera.GetComponent<MouseLook> ().enabled = false;	
+			myGame.SaveCharData ();
+			yield return new WaitForSeconds(3.0f);
 			Destroy(this.gameObject);
-			Application.LoadLevel ("GameTest");
+			myGame.tutorial = false;
+			playerObj.GetComponent<MouseLook> ().enabled = true;
+			Camera.mainCamera.GetComponent<MouseLook> ().enabled = true;
+			Application.LoadLevel ("testing");
 		}
 	}
 }

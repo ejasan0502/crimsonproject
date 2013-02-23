@@ -1,13 +1,14 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public struct Character
 {
 	public int slot;
 	public string name;
 	public string charClass;
-	public ArrayList inventory;
 	public float money;
+	public ArrayList inventory;
 	public ArrayList questsAvailable;
 	public ArrayList questsCompleted;
 	public ArrayList skills;
@@ -18,6 +19,21 @@ public struct Character
 	public float stamina;
 	public float staminaMax;
 	public float damage;
+	
+	// inventory items
+	private static List<Item> inventoryList = new List<Item>();
+	public static List<Item> Inventory
+	{
+		get{return inventoryList;}
+	}
+	
+	// equipped items
+	private static Weapon equippedWeapon; 
+	public static Weapon EquipWeapon
+	{
+		get {return equippedWeapon;}
+		set {equippedWeapon = value;}
+	}
 		
 	public Character (int s, string n, string c, ArrayList i, float m, ArrayList qa, ArrayList qc, ArrayList sk)
 	{
@@ -25,6 +41,7 @@ public struct Character
 		name = n;
 		charClass = c;
 		inventory = i;
+		
 		money = m;
 		questsAvailable = qa;
 		questsCompleted = qc;
@@ -51,4 +68,6 @@ public struct Character
 		healthMax = h;
 		staminaMax = s;
 	}
+	
+	
 }

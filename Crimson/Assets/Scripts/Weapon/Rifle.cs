@@ -3,14 +3,17 @@ using System.Collections;
 
 public class Rifle : MonoBehaviour 
 {
-	// Change later to be based on equipt weapon
-	public int range = 100;
+	// if this is on player change to be based on equipped weapon
+	public int range = 30;
 	public float fireRate = .5f;
+	public int minDmg = 4;
+	public int maxDmg = 7;
+	public int reloadTime = 2;
+	
+	// weapon variables
 	public int force = 10;
-	public int dmg = 7;
 	public int clipSize = 20;
 	public int clips = 5;
-	public int reloadTime = 2;
 	ParticleEmitter hitParticle;
 	public Renderer muzzleFlash;
 	
@@ -20,6 +23,8 @@ public class Rifle : MonoBehaviour
 	
 	public bool IsOnPlayer;
 	public bool IsAutomatic;
+	
+	private Weapon curWeapon;
 	
 	// Use this for initialization
 	void Start () 
@@ -32,28 +37,66 @@ public class Rifle : MonoBehaviour
 			hitParticle.emit = false;
 		}
 		bulletsLeft = clipSize;
+		
+		// if this is the players rifle find their equipped weapon stats
+		if (IsOnPlayer)
+		{
+			// if player has weapon equipped get its stats, if not set to default
+			if (Character.EquipWeapon != null)
+			{
+				range = Character.EquipWeapon.MaxRange;
+				fireRate = Character.EquipWeapon.AttackSpeed;
+				minDmg = Character.EquipWeapon.MinDamage;
+				maxDmg = Character.EquipWeapon.MaxDamage;
+				reloadTime = Character.EquipWeapon.ReloadTime;
+			}
+			else
+			{
+				range = 40;
+				fireRate = .6f;
+				minDmg = 1;
+				maxDmg = 3;
+				reloadTime = 4;
+			}
+			
+			curWeapon = Character.EquipWeapon;
+		}
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		if (IsAutomatic == true)
+		if (IsOnPlayer)
 		{
-			if (Input.GetButton("Fire1"))
+			// check if weapon stats are current, if not set
+			if (curWeapon != Character.EquipWeapon)
 			{
-				if (bulletsLeft > 0)
+				range = Character.EquipWeapon.MaxRange;
+				fireRate = Character.EquipWeapon.AttackSpeed;
+				minDmg = Character.EquipWeapon.MinDamage;
+				maxDmg = Character.EquipWeapon.MaxDamage;
+				reloadTime = Character.EquipWeapon.ReloadTime;
+			
+				curWeapon = Character.EquipWeapon;
+			}
+			if (IsAutomatic == true)
+			{
+				if (Input.GetButton("Fire1"))
 				{
-					BroadcastMessage("Fire");
+					if (bulletsLeft > 0)
+					{
+						gameObject.SendMessage("Fire");
+					}
 				}
 			}
-		}
-		else
-		{
-			if (Input.GetButtonDown("Fire1"))
+			else
 			{
-				if (bulletsLeft > 0)
+				if (Input.GetButtonDown("Fire1"))
 				{
-					BroadcastMessage("Fire");
+					if (bulletsLeft > 0)
+					{
+						gameObject.SendMessage("Fire");
+					}
 				}
 			}
 		}
@@ -124,7 +167,7 @@ public class Rifle : MonoBehaviour
 				
 			
 			// damage the object
-			hit.collider.SendMessageUpwards("ApplyDamage", dmg, SendMessageOptions.DontRequireReceiver);
+			hit.collider.SendMessageUpwards("ApplyDamage", Random.Range(minDmg, maxDmg), SendMessageOptions.DontRequireReceiver);
 		}
 		
 		bulletsLeft--;

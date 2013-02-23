@@ -1,0 +1,83 @@
+fileFormatVersion: 2
+guid: 3605296eb3d6e184eb0d7d147c9cb354
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: DONOTMOVE_Rig_Controls_LtBladeArmControl_LtBladeArmGroup
+    100004: DONOTMOVE_RtBladeArmControl_RtBladeArmGroup_Rig_Controls
+    100006: Texture1_demon_model_DONOTMOVE
+    100008: Texture2_demon_model_DONOTMOVE
+    100010: Texture2_Texture22_demon_model_DONOTMOVE
+    400000: //RootNode
+    400002: DONOTMOVE_Rig_Controls_LtBladeArmControl_LtBladeArmGroup
+    400004: DONOTMOVE_RtBladeArmControl_RtBladeArmGroup_Rig_Controls
+    400006: Texture1_demon_model_DONOTMOVE
+    400008: Texture2_demon_model_DONOTMOVE
+    400010: Texture2_Texture22_demon_model_DONOTMOVE
+    2300000: DONOTMOVE_Rig_Controls_LtBladeArmControl_LtBladeArmGroup
+    2300002: DONOTMOVE_RtBladeArmControl_RtBladeArmGroup_Rig_Controls
+    2300004: Texture1_demon_model_DONOTMOVE
+    2300006: Texture2_demon_model_DONOTMOVE
+    2300008: Texture2_Texture22_demon_model_DONOTMOVE
+    3300000: DONOTMOVE_Rig_Controls_LtBladeArmControl_LtBladeArmGroup
+    3300002: DONOTMOVE_RtBladeArmControl_RtBladeArmGroup_Rig_Controls
+    3300004: Texture1_demon_model_DONOTMOVE
+    3300006: Texture2_demon_model_DONOTMOVE
+    3300008: Texture2_Texture22_demon_model_DONOTMOVE
+    4300000: Texture2_Texture22_demon_model_DONOTMOVE
+    4300002: Texture1_demon_model_DONOTMOVE
+    4300004: Texture2_demon_model_DONOTMOVE
+    4300006: DONOTMOVE_RtBladeArmControl_RtBladeArmGroup_Rig_Controls
+    4300008: DONOTMOVE_Rig_Controls_LtBladeArmControl_LtBladeArmGroup
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 2
+  userData: 

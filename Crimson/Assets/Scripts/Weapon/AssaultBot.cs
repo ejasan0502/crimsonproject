@@ -12,6 +12,7 @@ public class AssaultBot : MonoBehaviour
 	public bool targetIsPlayer;
 	GameObject player;
 	float targDist;
+	public bool ranged = true;
 	
 	void Start () 
 	{
@@ -34,7 +35,7 @@ public class AssaultBot : MonoBehaviour
 		else if (targetIsPlayer == true && !CanSeeTarget(player))
 		{
 			if (GameObject.FindWithTag("FriendlyRobot"))
-				target = GameObject.FindWithTag("FriendlyRobot");
+				target = GetNearest("FriendlyRobot");
 			else 
 				target = GameObject.FindWithTag("Player");
 		}
@@ -42,11 +43,11 @@ public class AssaultBot : MonoBehaviour
 		{
 			if (GameObject.FindWithTag ("Enemy"))
 			{
-				target = GameObject.FindWithTag("Enemy");
+				target = GetNearest("Enemy");
 				Debug.Log(target.tag + " Targeted!");
 			}
 			else if (GameObject.FindWithTag ("EnemyRobot"))
-				target = GameObject.FindWithTag("EnemyRobot");
+				target = GetNearest("EnemyRobot");
 		}
 		
 		// check if we have a target
@@ -58,7 +59,7 @@ public class AssaultBot : MonoBehaviour
 		
 		// Move towards target to point seekRange
 		targDist = Vector3.Distance(transform.position, target.transform.position);
-		if (targDist > seekRange)
+		if (targDist > seekRange && targDist < 40)
 			transform.position += transform.forward * moveSpeed * Time.deltaTime;
 		
 		// check if target is in sight to fire
@@ -68,9 +69,9 @@ public class AssaultBot : MonoBehaviour
 		var forward = transform.TransformDirection(Vector3.forward);
 		var targetDir = target.transform.position - transform.position;
 		if (Vector3.Angle(forward, targetDir) < atkAngle)
-			SendMessage("Fire");
-		
-		
+		{
+			SendMessage("Fire"); 
+		}
 	}
 	
 	// check if the target is in sight
@@ -84,5 +85,31 @@ public class AssaultBot : MonoBehaviour
 			return hit.transform == tar.transform;
 
 		return false;
+	}
+	
+	IEnumerator wait(float val){
+		yield return new WaitForSeconds(val);	
+	}
+	
+	private GameObject GetNearest(string tag)
+	{
+		float nearDistSqr = Mathf.Infinity;
+		GameObject[] nearObjs = GameObject.FindGameObjectsWithTag(tag);
+		GameObject target = null;
+		
+		// find the nearest object with tag
+		foreach (GameObject obj in nearObjs)
+		{
+			Vector3 pos = obj.transform.position;
+			float dist = (pos - transform.position).sqrMagnitude;
+			
+			if (dist < nearDistSqr)
+			{
+				target = obj;
+				nearDistSqr = dist;
+			}
+		}
+		
+		return target;
 	}
 }

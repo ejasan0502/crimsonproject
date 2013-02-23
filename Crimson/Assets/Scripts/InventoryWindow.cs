@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class InventoryWindow : MonoBehaviour
 {
@@ -10,9 +11,27 @@ public class InventoryWindow : MonoBehaviour
 	public Vector2 scrollPosition;
 	public Rect r;
 	
+	// double click variables
+	private float clickTimer = 0;
+	private const float DELTA_TIMER = 0.5f;
+	private Item selectedItem;
+	
+	// tooltip variables
+	string tooltip = "";
+	
+	// inventory variables
+	bool displayInv;
+	string[] items;
+	int invRows = 6;
+	int invCols = 5;
+	
+	// Button Variables
+	public float btnHeight = 40;
+	public float btnWidth = 40;
+	
 	void Awake ()
 	{
-		r = new Rect (Screen.width * 0.5f, Screen.height * 0.1f, Screen.width * 0.4f, Screen.height * 0.75f);
+		r = new Rect (Screen.width * 0.3f, Screen.height * 0.1f, Screen.width * 0.3f, Screen.height * 0.75f);
 	}
 	
 	// Use this for initialization
@@ -26,34 +45,88 @@ public class InventoryWindow : MonoBehaviour
 		menuStyle.fontSize = Mathf.RoundToInt (Screen.height * 0.05f);
 		menuStyle.normal.textColor = Color.white;
 		menuStyle.font = (Font)Resources.Load ("Fonts/After_Shok");
+		
+		
+	}
+	
+	void Update ()
+	{
+		if (Input.GetKeyDown (KeyCode.I)) 
+		{
+			// show/hide inventory
+			displayInv = !displayInv;
+			
+			// unlock/lock mouse
+			Screen.lockCursor = !displayInv;
+			playerObj.GetComponent<MouseLook> ().enabled = !displayInv;
+			Camera.mainCamera.GetComponent<MouseLook> ().enabled = !displayInv;
+		}
 	}
 	
 	void OnGUI ()
 	{
-		r = GUI.Window (2, r, window, "Inventory");	
-		playerObj.GetComponent<MouseLook> ().enabled = false;
-		Camera.mainCamera.GetComponent<MouseLook> ().enabled = false;
+		if (displayInv == true)
+			r = GUI.Window (2, r, window, "Inventory");	
 		
-		if (Input.GetKeyDown (KeyCode.I)) {
-			Debug.Log ("Inventory Close");
-			playerObj.GetComponent<MouseLook> ().enabled = true;
-			Camera.mainCamera.GetComponent<MouseLook> ().enabled = true;
-			Destroy (this.gameObject.GetComponent<InventoryWindow> ());
-		}
+		DisplayTooltip();
 	}
 	
 	void window (int windowID)
 	{
-		// Inventory
-		scrollPosition = GUI.BeginScrollView (new Rect (0, r.height * 0.1f, r.width, r.height),
-														scrollPosition, new Rect (0, 0, r.width, r.height));
-			
-		for (int i = 0; i < player.inventory.Count; i++) {
-			GUI.Box (new Rect(0,r.height * 0.1f * i,r.width,r.height * 0.1f),((NPC.Item)player.inventory [i]).name);	
+		int cnt = 0;
+		
+		for (int y=0; y<invRows; y++)
+		{
+			for (int x=0; x<invCols; x++)
+			{
+				if (cnt < Character.Inventory.Count)
+				{
+					if (GUI.Button(new Rect(20+ (x*btnWidth), 20+ (y*btnHeight), btnWidth, btnHeight), new GUIContent(Character.Inventory[cnt].Name, Character.Inventory[cnt].Tooltip())))
+					{
+						// check if btn is double clicked
+						if (clickTimer != 0 && selectedItem != null)
+						{
+							if (Time.time - clickTimer < DELTA_TIMER)
+							{
+								Debug.Log("Clicked: " + Character.Inventory[cnt].Name);
+								
+								if (Character.EquipWeapon == null)
+								{
+									// equip weapon
+									Character.EquipWeapon = (Weapon) Character.Inventory[cnt];
+									Character.Inventory.RemoveAt(cnt);
+								}
+								else
+								{
+									Item temp = Character.EquipWeapon;
+									// swap weapon
+									Character.EquipWeapon = (Weapon) Character.Inventory[cnt];
+									Character.Inventory[cnt] = temp;
+								}
+								
+								clickTimer = 0;
+								selectedItem = null;
+							}
+							else
+								clickTimer = 0;
+						
+						}
+						else
+						{
+							clickTimer = Time.time;
+							selectedItem = Character.Inventory[cnt];
+						}
+					}
+				}
+				else
+				{
+					GUI.Label(new Rect(20+ (x*btnWidth), 20+ (y*btnHeight), btnWidth, btnHeight), (x + y * invCols).ToString(), "box");
+				}
+				
+				cnt++;
+			}
 		}
-			
-		GUI.EndScrollView ();
-			
+		
 		// Money
 		menuStyle.fontSize = Mathf.RoundToInt (r.height * 0.05f);
 		menuStyle.alignment = TextAnchor.MiddleRight;
@@ -62,7 +135,31 @@ public class InventoryWindow : MonoBehaviour
 						menuStyle);
 		
 		Rect rec = new Rect (0, 0, r.width, r.height * 0.1f);
-
+		
+		SetTooltip();
 		GUI.DragWindow (rec);
+	}
+	
+	private void SetTooltip()
+	{
+		if (Event.current.type == EventType.Repaint && GUI.tooltip != tooltip)
+		{
+			if (tooltip != "")
+				tooltip = "";
+			if (GUI.tooltip != "")
+				tooltip = GUI.tooltip;	
+		}
+	}
+	
+	private void DisplayTooltip()
+	{
+		if (tooltip != "")
+			GUI.Box (new Rect(Screen.width/2 - 100, 10, 200, 175), tooltip);
+
+	}
+	
+	private void CloseTooltip()
+	{
+		tooltip = "";
 	}
 }

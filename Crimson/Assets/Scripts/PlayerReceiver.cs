@@ -18,7 +18,7 @@ public class PlayerReceiver : MonoBehaviour
 	GameObject plr;
 	int[] xpToLevel;
 	float gotHit;
-	float maxHP;
+	public float maxHP;
 	Rect deadMsg;
 	
 	
@@ -32,8 +32,8 @@ public class PlayerReceiver : MonoBehaviour
 		//curLevel = player.level;
 		curXP = player.curExp;
 		
-		maxHP = BASE_HP + (curLevel * HP_SCALE);
-		hitPoints = maxHP;
+		maxHP = player.healthMax; //maxHP = BASE_HP + (curLevel * HP_SCALE);
+		hitPoints = player.health;
 		
 		xpToLevel = new int[MAX_LEVEL];
 		
@@ -42,7 +42,7 @@ public class PlayerReceiver : MonoBehaviour
 		for (int i=1; i < MAX_LEVEL; i++)
 		{
 			xpToLevel[i] = xpToLevel[i-1] * XP_SCALE;
-		//	Debug.Log("Level " + i + " = " + xpToLevel[i]);
+			Debug.Log("Level " + i + " = " + xpToLevel[i]);
 		}
 	}
 	
@@ -53,6 +53,7 @@ public class PlayerReceiver : MonoBehaviour
 		curXP += amount;
 		
 		// check if player has leveled
+		Debug.Log(curXP + " / " + xpToLevel[curLevel]);
 		if (curXP >= xpToLevel[curLevel])
 		{
 			Debug.Log("Player Leveled");

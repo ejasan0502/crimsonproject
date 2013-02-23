@@ -8,7 +8,11 @@ public class DamageReceiver : MonoBehaviour
 	public int xp;
 	public Transform explosion;
 	public Rigidbody replaceDead;
+	public GameObject chest;
 	GameObject player;
+	
+	public int spawnChance;  // chance for a chest to spawn on death, in %
+	int ran;
 	
 	
 	
@@ -43,7 +47,7 @@ public class DamageReceiver : MonoBehaviour
 		if (gameObject.tag != "FriendlyRobot")
 		{
 			// find and send player xp
-			player = GameObject.Find("Player");
+			player = GameObject.FindWithTag("Player");
 			player.SendMessage("giveXP", xp);
 		}
 		// destroy the object
@@ -92,7 +96,16 @@ public class DamageReceiver : MonoBehaviour
 			dead.angularVelocity = rigidbody.angularVelocity;
 		}
 		
-		
+		// randomly spawn chest
+		if (chest)
+		{
+			ran = Random.Range(0, 100);
+			if (ran < spawnChance)
+			{
+				chest = (GameObject)Instantiate(chest, transform.position, transform.rotation);
+			
+			}
+		}
 	}
 	
 	

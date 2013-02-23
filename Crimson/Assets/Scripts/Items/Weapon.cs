@@ -8,11 +8,11 @@ public class Weapon : Item
 	
 	public Weapon()
 	{
-		minDmg = 0;
-		maxDmg = 0;
-		range = 0;
-		reloadTime = 0;
-		atkSpeed = 0;
+		minDmg = 1;
+		maxDmg = 2;
+		range = 30;
+		reloadTime = 4;
+		atkSpeed = .6f;
 	}
 	
 	public Weapon(int mDmg, int maDmg, int rng, int rTime, float aSpeed)
@@ -52,5 +52,18 @@ public class Weapon : Item
 	{
 		get {return atkSpeed;}
 		set {atkSpeed = value;}
+	}
+	
+	public override string Tooltip()
+	{
+		return Name + "\n" + 
+			Rarity + "\n" +
+			"Durability: " + CurDurability + " / " + MaxDurability + "\n" +
+			"Damage: " + minDmg + " - " + maxDmg + "\n" +
+			"Attack Speed: " + atkSpeed + "\n" +
+			"Reload Time: " + reloadTime + "\n" +
+			"Range: " + range + "\n\n\n" +
+			"Value: " + Value;
+					
 	}
 }
