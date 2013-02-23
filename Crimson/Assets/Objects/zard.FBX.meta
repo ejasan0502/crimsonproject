@@ -1,0 +1,180 @@
+fileFormatVersion: 2
+guid: cb1ff5a5a19e94048bcc85fda6709816
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: Bip01
+    100002: Bip01 Footsteps
+    100004: Bip01 Head
+    100006: Bip01 HeadNub
+    100008: Bip01 L Calf
+    100010: Bip01 L Foot
+    100012: Bip01 L Thigh
+    100014: Bip01 L Toe0
+    100016: Bip01 L Toe01
+    100018: Bip01 L Toe02
+    100020: Bip01 L Toe0Nub
+    100022: Bip01 L Toe1
+    100024: Bip01 L Toe11
+    100026: Bip01 L Toe12
+    100028: Bip01 L Toe1Nub
+    100030: Bip01 L Toe2
+    100032: Bip01 L Toe21
+    100034: Bip01 L Toe22
+    100036: Bip01 L Toe2Nub
+    100038: Bip01 Neck
+    100040: Bip01 Pelvis
+    100042: Bip01 R Calf
+    100044: Bip01 R Foot
+    100046: Bip01 R Thigh
+    100048: Bip01 R Toe0
+    100050: Bip01 R Toe01
+    100052: Bip01 R Toe02
+    100054: Bip01 R Toe0Nub
+    100056: Bip01 R Toe1
+    100058: Bip01 R Toe11
+    100060: Bip01 R Toe12
+    100062: Bip01 R Toe1Nub
+    100064: Bip01 R Toe2
+    100066: Bip01 R Toe21
+    100068: Bip01 R Toe22
+    100070: Bip01 R Toe2Nub
+    100072: Bip01 Spine
+    100074: Bip01 Spine1
+    100076: Bip01 Spine2
+    100078: Bip01 Spine3
+    100080: Bip01 Tail
+    100082: Bip01 Tail1
+    100084: Bip01 Tail2
+    100086: Bip01 Tail3
+    100088: Bip01 Tail4
+    100090: Bip01 Tail5
+    100092: Bip01 Tail6
+    100094: Bip01 TailNub
+    100096: Bone01
+    100098: Bone02
+    100100: Bone03
+    100102: LOW POLY
+    100104: LOW POLY01
+    100106: LOW POLY03
+    100108: Plane01
+    100110: //RootNode
+    400000: Bip01
+    400002: Bip01 Footsteps
+    400004: Bip01 Head
+    400006: Bip01 HeadNub
+    400008: Bip01 L Calf
+    400010: Bip01 L Foot
+    400012: Bip01 L Thigh
+    400014: Bip01 L Toe0
+    400016: Bip01 L Toe01
+    400018: Bip01 L Toe02
+    400020: Bip01 L Toe0Nub
+    400022: Bip01 L Toe1
+    400024: Bip01 L Toe11
+    400026: Bip01 L Toe12
+    400028: Bip01 L Toe1Nub
+    400030: Bip01 L Toe2
+    400032: Bip01 L Toe21
+    400034: Bip01 L Toe22
+    400036: Bip01 L Toe2Nub
+    400038: Bip01 Neck
+    400040: Bip01 Pelvis
+    400042: Bip01 R Calf
+    400044: Bip01 R Foot
+    400046: Bip01 R Thigh
+    400048: Bip01 R Toe0
+    400050: Bip01 R Toe01
+    400052: Bip01 R Toe02
+    400054: Bip01 R Toe0Nub
+    400056: Bip01 R Toe1
+    400058: Bip01 R Toe11
+    400060: Bip01 R Toe12
+    400062: Bip01 R Toe1Nub
+    400064: Bip01 R Toe2
+    400066: Bip01 R Toe21
+    400068: Bip01 R Toe22
+    400070: Bip01 R Toe2Nub
+    400072: Bip01 Spine
+    400074: Bip01 Spine1
+    400076: Bip01 Spine2
+    400078: Bip01 Spine3
+    400080: Bip01 Tail
+    400082: Bip01 Tail1
+    400084: Bip01 Tail2
+    400086: Bip01 Tail3
+    400088: Bip01 Tail4
+    400090: Bip01 Tail5
+    400092: Bip01 Tail6
+    400094: Bip01 TailNub
+    400096: Bone01
+    400098: Bone02
+    400100: Bone03
+    400102: LOW POLY
+    400104: LOW POLY01
+    400106: LOW POLY03
+    400108: Plane01
+    400110: //RootNode
+    2300000: LOW POLY01
+    2300002: LOW POLY03
+    2300004: Plane01
+    3300000: LOW POLY01
+    3300002: LOW POLY03
+    3300004: Plane01
+    4300000: LOW POLY
+    4300002: LOW POLY01
+    4300004: Plane01
+    4300006: LOW POLY03
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: LOW POLY
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 2
+  userData: 
