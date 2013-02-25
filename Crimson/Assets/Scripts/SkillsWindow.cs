@@ -50,9 +50,9 @@ public class SkillsWindow : MonoBehaviour
 		skillsInUse = new bool[8];
 		
 		// FIX TO BE BASED ON PLAYER LEVEL playerLvl = player.level;
-		playerLvl = player.level;
+		playerLvl = 1;
 		numSkills = playerLvl;
-		charClass = "Engineer";
+		charClass = "";
 		Debug.Log(player.level);
 	}
 	
@@ -62,9 +62,6 @@ public class SkillsWindow : MonoBehaviour
 		{
 			if (windowOpen == false) windowOpen = true;
 			else windowOpen = false;
-			
-			playerLvl = player.level;
-			numSkills = playerLvl;
 		}
 	}
 	
@@ -110,7 +107,7 @@ public class SkillsWindow : MonoBehaviour
 		//Pistol Mastery
 		// Skill Number: 0
 		// Requirement: None
-		PistolMaster = GUI.Toggle (new Rect(r.width/8, 40, r.width/4, 40), PistolMaster, new GUIContent("Pistol Mastery", 
+		PistolMaster = GUI.Toggle (new Rect(r.width/8, 40, r.width/4, 40), PistolMaster, new GUIContent("Not Implemented", 
 				"Increases the damage done by Pistol weapons."));
 		if (PistolMaster)
 		{
@@ -137,7 +134,7 @@ public class SkillsWindow : MonoBehaviour
 		//Rifle Mastery
 		// Skill Number: 1
 		// Requirement: None
-		RifleMaster = GUI.Toggle (new Rect((r.width/8)*3, 40, r.width/4, 40), RifleMaster, new GUIContent("Rifle Mastery", 
+		RifleMaster = GUI.Toggle (new Rect((r.width/8)*3, 40, r.width/4, 40), RifleMaster, new GUIContent("Not Implemented", 
 				"Increases the damage done by Rifle weapons."));
 		if (RifleMaster)
 		{
@@ -197,7 +194,7 @@ public class SkillsWindow : MonoBehaviour
 		//Quick Shot
 		// Skill Number: 3
 		// Requirement: Level 3
-		QuickShot = GUI.Toggle (new Rect(r.width/4, 80, r.width/4, 40), QuickShot, new GUIContent("Quick Shot", 
+		QuickShot = GUI.Toggle (new Rect(r.width/4, 80, r.width/4, 40), QuickShot, new GUIContent("Not Implemented", 
 				"Increases how fast the player shoots for a short time."));
 		if (QuickShot)
 		{
@@ -257,7 +254,7 @@ public class SkillsWindow : MonoBehaviour
 		//Frenzy
 		// Skill Number: 5
 		// Requirement: Level 7
-		Frenzy = GUI.Toggle (new Rect(r.width/4, 130, r.width/4, 40), Frenzy, new GUIContent("Frenzy", 
+		Frenzy = GUI.Toggle (new Rect(r.width/4, 130, r.width/4, 40), Frenzy, new GUIContent("Not Implemented", 
 				"Increases the damage done player weapons for a short time."));
 		if (Frenzy)
 		{
@@ -353,24 +350,6 @@ public class SkillsWindow : MonoBehaviour
 		scrollPosition = GUI.BeginScrollView (new Rect (0, r.height * 0.1f, r.width, r.height),
 														scrollPosition, new Rect (0, 0, r.width, r.height));
 			
-		int amount = 0;
-		ArrayList skills = new ArrayList();
-		if (player.charClass == "Marksman")
-		{
-			amount = myGame.MarksmanSkills.Count;
-			skills = myGame.MarksmanSkills;
-		} 
-		else if (player.charClass == "Engineer")
-		{
-			amount = myGame.EngineerSkills.Count;
-			skills = myGame.EngineerSkills;
-		}
-		
-		for (int i = 0; i < amount; i++) {
-			GUI.Box (	new Rect (0, r.height * 0.1f * i, r.width, r.height * 0.1f),
-						((Skill)skills[i]).name);	
-		}
-			
 		GUI.EndScrollView ();
 		
 		Rect rec = new Rect (0, 0, r.width, r.height * 0.1f);
@@ -393,7 +372,7 @@ public class SkillsWindow : MonoBehaviour
 		//Tool Mastery
 		// Skill Number: 0
 		// Requirement: None
-		ToolMaster = GUI.Toggle (new Rect(r.width/8, 40, r.width/4, 40), ToolMaster, new GUIContent("Tool Mastery", 
+		ToolMaster = GUI.Toggle (new Rect(r.width/8, 40, r.width/4, 40), ToolMaster, new GUIContent("Not Implemented", 
 				"Increases the damage done by Tool weapons."));
 		if (ToolMaster)
 		{
@@ -422,7 +401,7 @@ public class SkillsWindow : MonoBehaviour
 		//Robot Mastery
 		// Skill Number: 1
 		// Requirement: None
-		RobotMaster = GUI.Toggle (new Rect((r.width/8)*3, 40, r.width/4, 40), RobotMaster, new GUIContent("Robot Mastery", 
+		RobotMaster = GUI.Toggle (new Rect((r.width/8)*3, 40, r.width/4, 40), RobotMaster, new GUIContent("Not Implemented", 
 				"Increases the damage done by Robots."));
 		if (RobotMaster)
 		{
@@ -482,7 +461,7 @@ public class SkillsWindow : MonoBehaviour
 		//Robot Defence
 		// Skill Number: 3
 		// Requirement: Level 3
-		RobotDefence = GUI.Toggle (new Rect(r.width/4, 80, r.width/4, 40), RobotDefence, new GUIContent("Robot Defence", 
+		RobotDefence = GUI.Toggle (new Rect(r.width/4, 80, r.width/4, 40), RobotDefence, new GUIContent("Not Implemented", 
 				"Increases the defence of the player when they have a robot summoned."));
 		if (RobotDefence)
 		{
@@ -608,7 +587,7 @@ public class SkillsWindow : MonoBehaviour
 		//Summon MAADD
 		// Skill Number: 7
 		// Requirement: Level 10
-		SummonMAADD = GUI.Toggle (new Rect((r.width/8)*3, 180, r.width/4, 40), SummonMAADD, new GUIContent("Summon M.A.A.D.D.", 
+		SummonMAADD = GUI.Toggle (new Rect((r.width/8)*3, 180, r.width/4, 40), SummonMAADD, new GUIContent("Not Implemented", 
 				"Summon Mobile Anti-Alien Destruction Device for a short time."));
 		if (SummonMAADD)
 		{
@@ -638,23 +617,6 @@ public class SkillsWindow : MonoBehaviour
 		scrollPosition = GUI.BeginScrollView (new Rect (0, r.height * 0.1f, r.width, r.height),
 														scrollPosition, new Rect (0, 0, r.width, r.height));
 		
-		int amount = 0;
-		ArrayList skills = new ArrayList();
-		if (player.charClass == "Marksman")
-		{
-			amount = myGame.MarksmanSkills.Count;
-			skills = myGame.MarksmanSkills;
-		} 
-		else if (player.charClass == "Engineer")
-		{
-			amount = myGame.EngineerSkills.Count;
-			skills = myGame.EngineerSkills;
-		}
-		
-		for (int i = 0; i < amount; i++) {
-			GUI.Box (	new Rect (0, r.height * 0.1f * i, r.width, r.height * 0.1f),
-						((Skill)skills[i]).name);	
-		}
 			
 		GUI.EndScrollView ();
 		
@@ -665,5 +627,16 @@ public class SkillsWindow : MonoBehaviour
 		// show tooltip
 		GUI.Label(new Rect((r.width/2)-50, (r.height/10)*9, 80, 50), "Description");
 		GUI.Label(new Rect((r.width/15), (r.height/15)*14,r.width, 50), GUI.tooltip);
+	}
+	
+	void AddLevel()
+	{
+		playerLvl++;
+		numSkills = playerLvl;
+	}
+	
+	void SetClass (string Class)
+	{
+		charClass = Class;
 	}
 }

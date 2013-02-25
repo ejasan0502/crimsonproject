@@ -41,11 +41,12 @@ public class SentryGun : MonoBehaviour
 			if (GameObject.FindWithTag ("Enemy"))
 			{
 				target = GetNearest("Enemy");
-				
+				Debug.Log("Target:: " + target);
 				// if nearest enemy is not in sight find enemyrobot
 				if (!CanSeeTarget(target))
 				{
 					target = GetNearest("EnemyRobot");
+					Debug.Log("Target Unseen, change to robots:: " + target);
 				}
 			}		
 		}

@@ -73,6 +73,7 @@ public class PlayerReceiver : MonoBehaviour
 		maxHP = BASE_HP + (curLevel * HP_SCALE);
 		hitPoints = maxHP; 
 		
+		BroadcastMessage("AddLevel");
 		plr.SendMessage("SaveCharData");
 	}
 	

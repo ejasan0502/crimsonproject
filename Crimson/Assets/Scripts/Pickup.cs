@@ -93,11 +93,13 @@ public class Pickup : MonoBehaviour {
 			break;
 		case "Marksman":
 			Debug.Log ("Marksman");
+			BroadcastMessage("SetClass", "Marksman");
 			GameObject.Find ("Rifle1").GetComponent<Weapon_Equip>().EquipWeapon("Rifle1");
 			Destroy(other.gameObject);
 			break;
 		case "Engineer":
 			Debug.Log ("Engineer");
+			BroadcastMessage("SetClass", "Engineer");
 			GameObject.Find ("Pistol1").GetComponent<Weapon_Equip>().EquipWeapon("Pistol1");
 			Destroy(other.gameObject);
 			break;

@@ -50,6 +50,13 @@ public class DamageReceiver : MonoBehaviour
 			player = GameObject.FindWithTag("Player");
 			player.SendMessage("giveXP", xp);
 		}
+		
+		// play death animation
+		if (animation)
+		{
+			animation.Play("Die");
+		}
+		
 		// destroy the object
 		Destroy(gameObject);
 		
