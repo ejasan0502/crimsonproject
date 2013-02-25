@@ -71,6 +71,7 @@ public class AssaultBot : MonoBehaviour
 		if (Vector3.Angle(forward, targetDir) < atkAngle)
 		{
 			SendMessage("Fire"); 
+			if (!animation.IsPlaying("Attack")) animation.Play("Attack");
 		}
 	}
 	
